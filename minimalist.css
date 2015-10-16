@@ -1,0 +1,210 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+/* ==========================================================================
+   General
+   ========================================================================== */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  background-color: white;
+  color: #333;
+  font-size: 0.8em; /* for mobile, overwritten below in media query for desktops */
+  font-family: 'Open Sans', sans-serif;
+  /*font-weight: 300;*/
+  line-height: 1.625em;
+}
+@media (min-width: 520px) {
+  html {
+    font-size: 17px;
+  }
+}
+		
+main {
+	margin: 0 auto;
+	padding: 3em;
+	max-width: 38em;
+  display: block; /* neccessary for IE 9/10/11 to properly display the main element */
+  position: relative; /* to make it appear above the absolutely positioned coffeestain element */
+}
+		
+h1, h2 {
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 1.4em;
+  /*font-weight: 400;*/
+  /*font-family: Georgia, 'Times New Roman', Times, serif;*/
+  /*font-style: italic;*/
+  /*text-align: center;*/
+}
+h2 {
+  font-size: 1.2em;
+  /*line-height: 1.2em;*/
+  /*font-weight: 700;*/
+  /*margin: 1em 0;*/
+}
+p {
+  margin: 1em 0;
+	word-wrap: break-word;
+}
+a {
+  color: #000;
+  /*color: #222;*/
+  text-decoration: underline;
+  text-decoration-color: #666;
+}
+h1 a{
+  text-decoration: none;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #666;
+  margin: 3em auto;
+  padding: 0;
+  width: 67%;
+  clear: both;
+}
+em {
+  font-style: italic;
+}
+strong {
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+header {
+  overflow: auto;
+}
+header a {
+	/*color: #CCC;*/
+}
+header .container {
+  margin: 0 auto;
+	/*padding: 3em;*/
+	max-width: 38em;
+  overflow: auto;
+	padding: 0 3em;
+}
+header .autograph {
+	float: left;
+	width: 100px;
+	height: 41px;
+	background-size: 100px;
+	background-image: url("imgs/autograph-black.png");
+  background-repeat: no-repeat;
+  margin: 0.5em 0;
+}
+header nav {
+  float: right;
+  margin: 1em 0;
+}
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+header nav li {
+  display: inline-block;
+  padding: 0 1em;
+}
+header nav li + li {
+  border-left: 1px solid #666;
+}
+header nav a {
+  text-decoration: none;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.project-list ul {
+  /*list-style: none;*/
+  /*margin: 0;*/
+  /*padding-left: 1em;*/
+}
+.project-list li {
+  padding: 0;
+  margin-bottom: 3em;
+}
+.project-list li img {
+  width: auto;
+  height: auto;
+  max-width: 80px;
+  float: right;
+}
+.project-list h2 {
+  display: inline-block;
+}
+.github {
+  display: block;
+  font-family: monospace;
+}
+.github:before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background-image: url('imgs/github-mark.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  margin-bottom: -2px;
+}
+
+/* ==========================================================================
+   Blog
+   ========================================================================== */
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+article time {
+	color: #666;
+  /*font-size: 0.8em;*/
+  margin-top: 1em;
+  font-weight: 300;
+  /*text-transform: uppercase;*/
+}
+.continuereading {
+  margin-left: 0.5em;
+}
+code {
+  line-height: 1.4em;
+}
+blockquote {
+	padding: 0 2em;
+  margin: 1em 0;
+  font-weight: 300;
+  font-style: italic;
+}
+q:before {
+  content: open-quote;
+}
+q:after {
+  content: close-quote;
+}
+cite a {
+  color: #222;
+}
