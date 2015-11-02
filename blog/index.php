@@ -12,7 +12,7 @@
     
     libxml_use_internal_errors(true); // prevent html5 semantic tags from throwing errors
     $files = glob('*.php'); // get all .php files in folder
-    // remove files which lack a 'date' meta tag (since they are not articles)
+    // remove files which lack a 'date' meta tag (assuming they are not articles)
     foreach ($files as $key => $file) {
       if (!isset(get_meta_tags($file)['date'])) {
         unset($files[$key]);
