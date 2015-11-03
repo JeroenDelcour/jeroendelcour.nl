@@ -1,3 +1,6 @@
+# disable directory browsing
+Options -Indexes
+
 RewriteEngine	On
 RewriteRule	^$			blog/	[PT]
 RewriteCond	%{REQUEST_FILENAME}	!-f
