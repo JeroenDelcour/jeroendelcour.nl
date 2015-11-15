@@ -236,6 +236,12 @@ cite a {
   color: #222;
 }
 
+.comments .name {
+  color: #cd6400;
+}
+.comments p {
+  margin-top: 0;
+}
 .comments input, .comments textarea {
   border: 1px solid #CCC;
   padding: 0.4em;

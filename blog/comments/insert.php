@@ -11,14 +11,15 @@ if($_POST['email'] != ''){
 
 		// create 'comments' table
 		// $db->exec("DROP TABLE comments");
-		// $db->exec("CREATE TABLE comments (Id INTEGER PRIMARY KEY, post TEXT, name TEXT, website TEXT, comment TEXT)");  
+		// $db->exec("CREATE TABLE comments (Id INTEGER PRIMARY KEY, post TEXT, date INTEGER, name TEXT, website TEXT, comment TEXT)");  
 
 		// inserting data
 		$data = $_POST;
 		unset($data['email']);
+		$data['date'] = time(); // the current Unix timestamp (number of seconds since Jan 01 1970 (UTC)))
 		// st means "Statement Handle"
-		$st = $db->prepare("INSERT INTO comments (post, name, website, comment) values (:post, :name, :website, :comment)");
-		$st->execute($data);
+		$sh = $db->prepare("INSERT INTO comments (post, name, website, date, comment) values (:post, :name, :website, :date, :comment)");
+		$sh->execute($data);
 		echo 'Comment posted';
 	}
 

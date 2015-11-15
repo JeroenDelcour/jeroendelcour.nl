@@ -13,7 +13,7 @@
 
 
 			// get comments for this post (based on post url)
-			$sth = $db->query('SELECT post, name, website, comment from comments where post = :post');
+			$sth = $db->query('SELECT post, date, name, website, comment from comments where post = :post');
 			$data = array( 'post' => str_replace('.php', '', basename($_SERVER['PHP_SELF'])) );
 			$sth->execute($data);
 			$sth->setFetchMode(PDO::FETCH_ASSOC); // setting the fetch mode to return an associative array
@@ -23,7 +23,13 @@
 				foreach ($result as $row) {
 					?>
 					<div class="comment">
-						<a class="name" href="<?php echo $row['website']; ?>"><?php echo $row['name']; ?></a>
+						<?php if ($row['website'] != '') { ?>
+							<a class="name" href="<?php echo $row['website']; ?>"><?php echo $row['name']; ?></a>
+						<?php } else { ?>
+							<span class="name"><?php echo $row['name']; ?></span>
+						<?php } ?>
+						&bullet;
+						<time><?php echo date("M j, Y, H:i", $row['date']); ?></time>
 						<p><?php echo $row['comment']; ?></p>
 					</div>
 					<?php
@@ -41,13 +47,14 @@
 		// close the database
 		$db = null;
 	?>
-	<form action="../comments/insert-comment.php" method="post">
-		<input class="commentFormVal" type="text" name="name" placeholder="Name">
-		<input class="commentFormVal" type="text" name="website" placeholder="Website (optional)">
-		<textarea class="commentFormVal" name="comment" placeholder="Comment"></textarea>
-		<input style="display: none;" class="commentFormVal" type="text" name="email" placeholder="Please leave me empty" autocomplete=off>
+
+	<form action="../comments/insert.php" method="post" onsubmit="submitComment(); return false;">
+		<input class="commentFormVal" type="text" name="name" placeholder="Name" required>
+		<input class="commentFormVal" type="url" name="website" placeholder="Website (optional)">
+		<textarea class="commentFormVal" name="comment" placeholder="Comment" required></textarea>
+		<input style="display: none;" class="commentFormVal" type="email" name="email" placeholder="Please leave me empty" autocomplete=off>
 		<input style="display: none;" class="commentFormVal" type="text" name="post" value="<?php echo str_replace('.php', '', basename($_SERVER['PHP_SELF'])); ?>" autocomplete=off>
-		<input id="submit_comment" type="submit" value="Submit" onclick="submitComment(); return false;"/>
+		<input id="submit_comment" type="submit" value="Submit"/>
 	</form>
 </section>
 
@@ -57,8 +64,9 @@
 <script src="<?php echo $base_url; ?>/prism/prism.js"></script>
 
 <script>
-	function submitComment()
-	{
+	function submitComment() {
+		document.getElementById("submit_comment").value = 'Just a sec...';
+
 	    var elements = document.getElementsByClassName("commentFormVal");
 	    var formData = new FormData(); 
 	    for(var i=0; i<elements.length; i++)
@@ -66,14 +74,14 @@
 	        formData.append(elements[i].name, elements[i].value);
 	    }
 	    var xmlHttp = new XMLHttpRequest();
-	        xmlHttp.onreadystatechange = function()
-	        {
-	            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-	            {
-	                document.getElementById("submit_comment").value = xmlHttp.responseText;
-	            }
-	        }
-	        xmlHttp.open("post", "../comments/insert.php"); 
-	        xmlHttp.send(formData); 
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+            	location.reload();
+            }
+        }
+        xmlHttp.open("post", "../comments/insert.php"); 
+        xmlHttp.send(formData);
 	}
 </script>
