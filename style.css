@@ -236,6 +236,20 @@ cite a {
   color: #222;
 }
 
+.comments input, .comments textarea {
+  border: 1px solid #CCC;
+  padding: 0.4em;
+  border-radius: 3px;
+  margin-bottom: 0.2em;
+}
+.comments textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
 
 @media (min-width: 520px) {
   html {
