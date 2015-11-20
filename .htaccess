@@ -1,8 +1,13 @@
 # disable directory browsing
 Options -Indexes
 
-RewriteEngine	On
-RewriteRule	^$			blog/	[PT]
-RewriteCond	%{REQUEST_FILENAME}	!-f
-RewriteCond	%{REQUEST_FILENAME}	!-d
-RewriteRule	^(.*)/$			$1.php	[L]
+RewriteEngine On
+RewriteRule	^$ blog/ [PT]
+RewriteCond	%{REQUEST_FILENAME} !-f
+RewriteCond	%{REQUEST_FILENAME}	!-d
+RewriteRule	^(.*)/$ $1.php [L]
+
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile C:/xampp/htdocs/site/blog/draft/.htpasswd
+Require valid-user

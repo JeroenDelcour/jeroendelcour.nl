@@ -1,0 +1,34 @@
+article h1 input {
+	border: 1px solid transparent;
+	width: 100%;
+	background: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+}
+article h1 input:hover, article h1 input:focus {
+	border: 1px dashed #888;
+}
+
+#input {
+	display: block;
+	width: 100%;
+	resize: vertical;
+	background: inherit;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	font-family: inherit;
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	margin-top: 1em;
+}
+#input:hover, #input:focus {
+	border: 1px dashed #888;
+}
+
+#formatted {
+	display: block;
+	width: 100%;
+	margin-top: 1em;
+}

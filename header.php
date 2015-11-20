@@ -1,7 +1,7 @@
 <header>
   <div class="container">
-    <!--<a class="autograph" href="<?php // echo $base_url; ?>"></a>-->
-    <a class="logo" href="<?php echo $base_url; ?>">
+    <!--<a class="autograph" href="<?php // echo $settings['baseurl']; ?>"></a>-->
+    <a class="logo" href="<?php echo $settings['baseurl']; ?>">
       <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="37.83685px" width="65.261102px" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 61.181643 35.473634">
       <g transform="translate(-288.58 -409.15)">
         <g fill="#fff">
@@ -13,8 +13,8 @@
     </a>
     <nav>
       <ul>
-      <li><a href="<?php echo $base_url ?>/blog">Blog</a></li>
-      <li><a href="<?php echo $base_url ?>/about/">About</a></li>
+      <li><a href="<?php echo $settings['baseurl'] ?>/blog">Blog</a></li>
+      <li><a href="<?php echo $settings['baseurl'] ?>/about/">About</a></li>
       <ul>
     </nav>
   </div>

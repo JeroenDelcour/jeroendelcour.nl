@@ -18,7 +18,7 @@ html {
   font-size: 0.8em; /* for smaller screens, overwritten below in media query for desktops */
   font-family: Roboto, 'Merriweather Sans', sans-serif;
   font-weight: 300;
-  line-height: 2em;
+  line-height: 1.8em;
 }
         
 main {
@@ -44,7 +44,7 @@ h2 {
 }
 p {
   margin: 1em 0;
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 p+h2 {
   margin-top: 1em;

@@ -28,7 +28,7 @@
           libxml_use_internal_errors(true);
           $doc->loadHtml(file_get_contents($article));
           
-          $url = $base_url . '/blog/' . preg_replace('/\.php$/', '/', $article);
+          $url = $settings['baseurl'] . '/blog/' . preg_replace('/\.php$/', '/', $article);
           echo '<li>';
           echo '<article>';
           $title = $doc->getElementsByTagName('title')->item(0)->nodeValue;
