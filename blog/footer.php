@@ -84,3 +84,15 @@
 </footer>
 
 <script src="<?php echo $settings['baseurl']; ?>/lib/prism/prism.js"></script>
+<script>
+	var cssId = 'prism';
+	if (!document.getElementById(cssId))
+	{
+	    var head  = document.getElementsByTagName('head')[0];
+	    var link  = document.createElement('link');
+	    link.id   = cssId;
+	    link.rel  = 'stylesheet';
+	    link.href = '../../lib/prism/themes/prism.css';
+	    head.appendChild(link);
+	}
+</script>
