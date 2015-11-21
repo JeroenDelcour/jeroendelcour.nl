@@ -1,0 +1,6 @@
+[submodule "lib/prism"]
+	path = lib/prism
+	url = https://github.com/PrismJS/prism
+[submodule "lib/marked"]
+	path = lib/marked
+	url = https://github.com/chjj/marked

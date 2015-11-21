@@ -24,7 +24,7 @@
 
 </main>
 
-<script src="marked.min.js"></script>
+<script src="../../lib/marked/marked.min.js"></script>
 <script>
 	function preview() {
 		var inputEl = document.getElementById('input');

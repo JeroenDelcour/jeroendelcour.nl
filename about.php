@@ -19,7 +19,7 @@
     <ul>
       <li>
         <h2><a href="/Octy" target="_blank">Octy</a> (work in progress)</h2>
-        <a class="img-link" href="/Octy" target="_blank"><img src="<?php echo $base_url; ?>/imgs/octy.svg"></a>
+        <a class="img-link" href="/Octy" target="_blank"><img src="<?php echo $settings['baseurl']; ?>/imgs/octy.svg"></a>
         <p>
           A platfomer-like mobile game with a built-in level editor. Built using the Phaser.js framework.
           Currently only available <a href="/Octy" target="_blank">in-browser</a> (work-in-progress version) and on <a href="https://www.microsoft.com/en-us/store/apps/octy/9nblggh0j563" target="_blank">Windows Phone</a> (old version built with Construct 2), but I do plan to release it on Android and possibly iPhone some day.
@@ -28,7 +28,7 @@
       <hr>
       <li>
         <h2><a href="/neuron-draw" target="_blank">Neuron draw</a></h2>
-        <a href="/neuron-draw" target="_blank"><img src="<?php echo $base_url; ?>/imgs/neuron-draw.png"></a>
+        <a href="/neuron-draw" target="_blank"><img src="<?php echo $settings['baseurl']; ?>/imgs/neuron-draw.png"></a>
         <p>
           A little exercise in HTML5 canvas drawing and procedural generation. It can create very interesting patterns when you play around with the input variables. Inspired by <a href="https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal" target="_blank">Santiago Ramón y Cajal</a>, who was one of the first to make detailed drawings of neurons.
         </p>
@@ -37,7 +37,7 @@
       <hr>
       <li>
         <h2><a href="/yearcircler" target="_blank">Yearcircler</a> (experimental)</h2>
-        <a href="/yearcicler" target="_blank"><img src="<?php echo $base_url; ?>/imgs/yearcircler.png"></a>
+        <a href="/yearcicler" target="_blank"><img src="<?php echo $settings['baseurl']; ?>/imgs/yearcircler.png"></a>
         <p>
           An experimental calendar/planner displaying a full year in the form of a clock. An exercise in building SVGs using JavaScript. Warning: breaks easily. I need to figure out a better way to display date ranges (especially ones that span multiple years).
         </p>

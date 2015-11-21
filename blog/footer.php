@@ -1,6 +1,6 @@
 <footer>
 	
-<a href="<?php echo $base_url;?>/blog">&larr; back to blog</a>
+<a href="<?php echo $settings['baseurl'];?>/blog">&larr; back to blog</a>
 
 <hr>
 
@@ -61,7 +61,7 @@
 
 </footer>
 
-<script src="<?php echo $base_url; ?>/prism/prism.js"></script>
+<script src="<?php echo $settings['baseurl']; ?>/lib/prism/prism.js"></script>
 
 <script>
 	function submitComment() {
