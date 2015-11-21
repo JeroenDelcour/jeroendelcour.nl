@@ -13,8 +13,8 @@
     </a>
     <nav>
       <ul>
-      <li><a href="<?php echo $settings['baseurl'] ?>/blog">Blog</a></li>
       <li><a href="<?php echo $settings['baseurl'] ?>/about/">About</a></li>
+      <li><a href="<?php echo $settings['baseurl'] ?>/blog">Blog</a></li>
       <ul>
     </nav>
   </div>
