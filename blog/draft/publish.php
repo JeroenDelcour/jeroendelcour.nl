@@ -6,7 +6,11 @@ $url = trim($url, "-");
 $url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
 $url = preg_replace('/[^-a-z0-9]+/i', '', $url);
 
-$file = fopen("../".$url.".php", "w") or die("Unable to open file!");
+$inputfile = fopen("../".$url.".md", "w") or die("Unable to open md file!");
+fwrite($inputfile, $_POST['input']);
+fclose($inputfile);
+
+$file = fopen("../".$url.".php", "w") or die("Unable to open php file!");
 
 $html = '<html lang="en">
 <head>

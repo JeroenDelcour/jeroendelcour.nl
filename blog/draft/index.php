@@ -46,8 +46,9 @@
 		var titleEl = document.getElementById('title');
 	    var inputEl = document.getElementById('input');
 	    var formData = new FormData(); 
-	    formData.set("title", titleEl.value);
+	    formData.set('title', titleEl.value);
 	    formData.set('content', marked(inputEl.value));
+	    formData.set('input', inputEl.value);
 	    var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
