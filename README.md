@@ -1,4 +1,4 @@
 # jeroendelcour.nl
 Personal website / CMS exercise
 
-Rewrite to Node.js.
+Rewrite of the original master branch to Node.js.
