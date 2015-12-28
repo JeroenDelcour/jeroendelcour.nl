@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <?php include("head.php"); ?>
-  <title>About Jeroen Delcour</title
+  <title>About Jeroen Delcour</title>
 </head>
 <body>  
 <?php include("header.php"); ?>
