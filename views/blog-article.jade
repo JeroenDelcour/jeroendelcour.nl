@@ -1,0 +1,13 @@
+extends layout
+
+block head
+	meta(name="date" content= post.published)
+	link(rel='stylesheet', href='/stylesheets/highlightjs/github-gist.css')
+
+block content
+	article
+		h1= post.title
+		time(datetime= post.published, pubdate="pubdate")= post.published
+		!= post.html
+
+	a(href="/blog") ← back to blog

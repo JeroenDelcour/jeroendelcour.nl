@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	h1= Blog
+	
+	ol.feed
+		- each post in articles
+			li
+				article
+					h1
+						a(href="/blog/"+post.slug)= post.title
+					time(datetime= post.published, pubdate="pubdate")= post.published
+					-
+						<!-- get first paragraph -->
+						var prefold = post.html.split("p>", 2)[1];
+					p
+						span!= prefold
+						a.continuereading( href="/blog/"+post.slug)  Continue reading →
+			hr

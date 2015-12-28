@@ -1,0 +1,44 @@
+extends layout
+
+block head
+	link(rel='stylesheet', href='/stylesheets/blog-draft.css')
+	link(rel='stylesheet', href='/stylesheets/highlightjs/github-gist.css')
+
+block content
+	h1= Draft
+
+	article
+		button( id="previewButton" onclick="preview()") Preview
+		form( method="post")
+			h1
+				input( type="text", name="title", id="editArticleTitle", placeholder="Title", required)
+			time(datetime= now, pubdate="pubdate")= now
+			textarea( rows=5 style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
+			div( id="formatted" style="display: none;")
+			input( type="submit", value="Publish")
+
+	script(src="/javascripts/marked.min.js")
+	script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js")
+
+	script(type='text/javascript').
+		marked.setOptions({
+		  highlight: function (code) {
+		    return hljs.highlightAuto(code).value;
+		  }
+		});
+
+		function preview() {
+			var inputEl = document.getElementById('editArticleBody');
+			var formattedEl = document.getElementById('formatted');
+			var previewButton = document.getElementById('previewButton');
+			if (inputEl.style.display == 'block' && formattedEl.style.display == 'none') {
+				formattedEl.innerHTML = marked(inputEl.value);
+				inputEl.style.display = 'none';
+				formattedEl.style.display = 'block';
+				previewButton.innerHTML = 'Edit';
+			} else if (inputEl.style.display == 'none' && formattedEl.style.display == 'block') {
+				inputEl.style.display = 'block';
+				formattedEl.style.display = 'none';
+				previewButton.innerHTML = 'Preview';
+			}
+		}
