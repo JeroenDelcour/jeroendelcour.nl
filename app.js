@@ -6,18 +6,19 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var fs = require("fs");
 var sqlite3 = require("sqlite3").verbose();
-var auth = require('basic-auth')
+var auth = require('basic-auth');
 var dateformat = require('dateformat');
 var slug = require("slug");
 var marked = require("marked");
 var md5 = require("md5");
 
-var authorization = require("./authorization")
+var articleProvider = require("./articleprovider");
+var authorized = require("./authorization");
 
 marked.setOptions({
-  highlight: function (code) {
-    return require('highlight.js').highlightAuto(code).value;
-  }
+	highlight: function (code) {
+		return require('highlight.js').highlightAuto(code).value;
+	}
 });
 
 var app = express();
@@ -52,57 +53,75 @@ app.get('/about', function(req, res, next) {
 });
 
 app.get('/blog', function(req, res){
-	var db = new sqlite3.Database(dbfile);
+	// var db = new sqlite3.Database(dbfile);
 
-	db.all("SELECT * FROM articles ORDER BY published DESC", function(err, rows) {
-		for (var i = 0; i < rows.length; i++) {
-			var date = new Date(rows[i].published);
-			rows[i].published = dateformat(date, 'mmmm dS, yyyy');
-		}
-		res.render('blog-list', {tite: 'Jeroen Delcour', articles: rows});
-		db.close();
+	// db.all("SELECT * FROM articles ORDER BY published DESC", function(err, rows) {
+	// 	for (var i = 0; i < rows.length; i++) {
+	// 		var date = new Date(rows[i].published);
+	// 		rows[i].published = dateformat(date, 'mmmm dS, yyyy');
+	// 	}
+	// 	res.render('blog-list', {tite: 'Jeroen Delcour', articles: rows});
+	// 	db.close();
+	// });
+	articleProvider.getArticles(5, 0, function(error, rows){
+			res.render('blog-list', {title: 'Jeroen Delcour', articles: rows});
 	});
 });
 
 // needs to be called before app.get('/blog/:slug')
 app.route('/blog/draft')
 	.get(function(req, res){
-		var credentials = auth(req);
-	  if (!credentials || !authorization(credentials.name, md5(credentials.pass))) {
-	    res.statusCode = 401
-	    res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"')
-	    res.end('Access denied')
-	  } else {
+		// var credentials = auth(req);
+	 //  if (!credentials || !authorization(credentials.name, md5(credentials.pass))) {
+	 //    res.statusCode = 401
+	 //    res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"')
+	 //    res.end('Access denied')
+	 //  } else {
+		// 	res.render('blog-draft', { title: 'Draft | Jeroen Delcour', now: dateformat(new Date(), 'mmmm dS, yyyy')});
+	 //  }
+		if (authorized(req)){
 			res.render('blog-draft', { title: 'Draft | Jeroen Delcour', now: dateformat(new Date(), 'mmmm dS, yyyy')});
-	  }
+		} else {
+			res.statusCode = 401
+			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"')
+			res.end('Access denied')
+		}
 	})
 	.post(function(req, res){
 		var credentials = auth(req);
-	  if (!credentials || !authorization(credentials.name, md5(credentials.pass))) {
-	    res.statusCode = 401
-	    res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"')
-	    res.end('Access denied')
-	  } else {
-			db = new sqlite3.Database(dbfile);
-			db.serialize(function() {
-				var stmt = db.prepare("INSERT INTO articles VALUES (datetime('now'), datetime('now'), ?, ?, ?, ?)");
-				var articleSlug = slug(req.body.title);
-				stmt.run(req.body.title, req.body.body, marked(req.body.body), articleSlug);
-				stmt.finalize();
+		if (!credentials || !authorization(credentials.name, md5(credentials.pass))) {
+			res.statusCode = 401
+			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"')
+			res.end('Access denied')
+		} else {
+			// db = new sqlite3.Database(dbfile);
+			// db.serialize(function() {
+			// 	var stmt = db.prepare("INSERT INTO articles VALUES (datetime('now'), datetime('now'), ?, ?, ?, ?)");
+			// 	var articleSlug = slug(req.body.title);
+			// 	stmt.run(req.body.title, req.body.body, marked(req.body.body), articleSlug);
+			// 	stmt.finalize();
+			// 	res.redirect('/blog/'+articleSlug);
+			// });
+			// db.close();
+			articleProvider.save(req.body, function(error, articleSlug){
 				res.redirect('/blog/'+articleSlug);
-			});
-			db.close();
-	  }
+			})
+		}
 	});
 
 app.get('/blog/:slug', function(req, res) {
+	// var slug = req.params.slug;
+	// var db = new sqlite3.Database(dbfile);
+	// db.get("SELECT * FROM articles WHERE slug='"+slug+"'", function(err, row) {
+	// 	var date = new Date(row.published);
+	// 	row.published = dateformat(date, 'mmmm dS, yyyy');
+	// 	res.render('blog-article', { post: row });
+	// 	db.close();
+	// });
+	
 	var slug = req.params.slug;
-	var db = new sqlite3.Database(dbfile);
-	db.get("SELECT * FROM articles WHERE slug='"+slug+"'", function(err, row) {
-		var date = new Date(row.published);
-		row.published = dateformat(date, 'mmmm dS, yyyy');
+	articleProvider.findBySlug(slug, function(error, row){
 		res.render('blog-article', { post: row });
-		db.close();
 	});
 });
 
