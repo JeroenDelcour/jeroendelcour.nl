@@ -6,4 +6,4 @@ Rewrite of the original master branch to Node.js.
 ## To-do:
 - Pagination
 - Save/edit drafts
-- Pingback
+- Abstract database calling functions
