@@ -210,6 +210,22 @@ article time {
   font-family: 'Roboto', Georgia, serif;
 }
 
+#loading {
+  text-align: center;
+}
+@keyframes updown {
+  from { transform: translateY(0); }
+  to { transform: translateY(5px); }
+}
+#loading #arrow {
+  display: block;
+  animation-name: updown;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
 blockquote {
   padding: 0 2em;
   margin: 1em 0;

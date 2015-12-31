@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var articlesPerRequest = 5;
 
 app.get('/', function(req, res, next) {
 	res.render('about', { title: 'Jeroen Delcour' });
@@ -29,11 +30,22 @@ app.get('/about', function(req, res, next) {
 	res.render('about', { title: 'Jeroen Delcour' });
 });
 
-app.get('/blog', function(req, res){
-	articleProvider.getArticles(5, 0, function(error, rows){
-			res.render('blog-list', {title: 'Jeroen Delcour', articles: rows});
+app.route('/blog')
+	.get(function(req, res){
+		articleProvider.getArticles(articlesPerRequest, 0, function(error, rows){
+				res.render('blog-list', {title: 'Jeroen Delcour', articles: rows});
+		});
+	})
+	.post(function(req, res){
+		articleProvider.getArticles(articlesPerRequest, req.body.requestNumber * articlesPerRequest, function(error, rows){
+			if(rows.length > 0) {
+				res.render('blog-list-append.jade', {articles: rows});
+			} else {
+				res.statusCode = 204;
+				res.end();
+			}
+		});
 	});
-});
 
 // needs to be called before app.get('/blog/:slug')
 app.route('/blog/draft')
