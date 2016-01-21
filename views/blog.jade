@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1= Blog
+	
+	ol.feed
+		include ./blog-list
+	#loading
+
+	script(src="javascripts/infinite-scrolling.js")
