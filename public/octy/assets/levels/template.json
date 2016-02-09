@@ -1,0 +1,19 @@
+{
+"level": "template",
+"worldSize": {"width": 15, "height": 68},
+"tileSize": {"width": 32, "height": 32},
+"OctySpawn": {"x": 7, "y": 64},
+"MrsOctySpawn": {"x": 11, "y": 1},
+"walls": [{"id": 0, "x": 0, "y": 0, "width": 15, "height": 1, "outerWall": true,
+            "urchins": []},
+          {"id": 1, "x": 0, "y": 1, "width": 1, "height": 67, "outerWall": true,
+            "urchins": []},
+          {"id": 2, "x": 14, "y": 1, "width": 1, "height": 67, "outerWall": true,
+            "urchins": []},
+          {"id": 3, "x": 0, "y": 68, "width": 15, "height": 1, "outerWall": true,
+            "urchins": []},
+          {"id": 4, "x": 10 ,"y": 4 ,"width": 4 ,"height": 1,
+            "urchins": []}],
+"currents": [],
+"pufferfish": []
+}

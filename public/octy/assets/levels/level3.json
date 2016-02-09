@@ -1,0 +1,369 @@
+{
+	"level": 3,
+	"worldSize": {
+		"width": 15,
+		"height": 68
+	},
+	"tileSize": {
+		"width": 32,
+		"height": 32
+	},
+	"OctySpawn": {
+		"x": 7,
+		"y": 64
+	},
+	"MrsOctySpawn": {
+		"x": 11,
+		"y": 1
+	},
+	"walls": [
+		{
+			"x": 0,
+			"y": 0,
+			"width": 15,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 0,
+			"y": 1,
+			"width": 1,
+			"height": 67,
+			"urchins": [
+				{
+					"x": 2,
+					"y": 26,
+					"angle": "right"
+				},
+				{
+					"x": 2,
+					"y": 28,
+					"angle": "right"
+				},
+				{
+					"x": 2,
+					"y": 20,
+					"angle": "right"
+				},
+				{
+					"x": 2,
+					"y": 18,
+					"angle": "right"
+				},
+				{
+					"x": 2,
+					"y": 12,
+					"angle": "right"
+				},
+				{
+					"x": 2,
+					"y": 14,
+					"angle": "right"
+				}
+			]
+		},
+		{
+			"x": 14,
+			"y": 1,
+			"width": 1,
+			"height": 67,
+			"urchins": []
+		},
+		{
+			"x": 0,
+			"y": 68,
+			"width": 15,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 10,
+			"y": 4,
+			"width": 4,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 55,
+			"width": 8,
+			"height": 4,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 65,
+			"width": 2,
+			"height": 3,
+			"urchins": []
+		},
+		{
+			"x": 12,
+			"y": 66,
+			"width": 2,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 59,
+			"width": 1,
+			"height": 5,
+			"urchins": []
+		},
+		{
+			"x": 2,
+			"y": 59,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 53,
+			"width": 1,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 2,
+			"y": 54,
+			"width": 2,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 13,
+			"y": 50,
+			"width": 1,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 12,
+			"y": 50,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 13,
+			"y": 37,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 11,
+			"y": 49,
+			"width": 3,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 43,
+			"width": 1,
+			"height": 4,
+			"urchins": []
+		},
+		{
+			"x": 2,
+			"y": 44,
+			"width": 1,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 0,
+			"y": 36,
+			"width": 3,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 38,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 10,
+			"y": 39,
+			"width": 4,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 11,
+			"y": 38,
+			"width": 3,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 5,
+			"y": 31,
+			"width": 1,
+			"height": 3,
+			"urchins": []
+		},
+		{
+			"x": 6,
+			"y": 32,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 12,
+			"y": 30,
+			"width": 2,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 13,
+			"y": 31,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 11,
+			"y": 12,
+			"width": 3,
+			"height": 7,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 30,
+			"width": 4,
+			"height": 6,
+			"urchins": [
+				{
+					"x": 6,
+					"y": 35,
+					"angle": "right"
+				},
+				{
+					"x": 4,
+					"y": 37,
+					"angle": "down"
+				}
+			]
+		},
+		{
+			"x": 1,
+			"y": 29,
+			"width": 3,
+			"height": 1,
+			"urchins": [
+				{
+					"x": 3,
+					"y": 28,
+					"angle": "up"
+				}
+			]
+		},
+		{
+			"x": 12,
+			"y": 19,
+			"width": 2,
+			"height": 2,
+			"urchins": []
+		},
+		{
+			"x": 13,
+			"y": 21,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 9,
+			"width": 6,
+			"height": 2,
+			"urchins": [
+				{
+					"x": 3,
+					"y": 12,
+					"angle": "down"
+				},
+				{
+					"x": 5,
+					"y": 12,
+					"angle": "down"
+				}
+			]
+		},
+		{
+			"x": 1,
+			"y": 6,
+			"width": 4,
+			"height": 3,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 1,
+			"width": 2,
+			"height": 6,
+			"urchins": []
+		},
+		{
+			"x": 3,
+			"y": 1,
+			"width": 1,
+			"height": 1,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 21,
+			"width": 1,
+			"height": 4,
+			"urchins": []
+		},
+		{
+			"x": 1,
+			"y": 15,
+			"width": 1,
+			"height": 2,
+			"urchins": []
+		}
+	],
+	"currents": [
+		{
+			"x": 1,
+			"y": 40,
+			"width": 13,
+			"height": 10,
+			"force": [
+				20,
+				0
+			]
+		},
+		{
+			"x": 1,
+			"y": 11,
+			"width": 13,
+			"height": 18,
+			"force": [
+				20,
+				0
+			]
+		}
+	],
+	"pufferfish": [],
+	"text": [
+		{
+			"x": 1.7,
+			"y": 55.7,
+			"text": "look out\nfor currents"
+		}
+	]
+}

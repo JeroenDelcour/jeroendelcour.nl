@@ -1,0 +1,186 @@
+
+> jeroendelcour@0.0.0 start /root/nodejs
+> node ./bin/www
+
+[0mGET /dnasi [33m404 [0m545.930 ms - 2529[0m
+[0mGET /stylesheets/style.css [36m304 [0m3.030 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m1.412 ms - -[0m
+[0mGET / [36m304 [0m40.896 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.803 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m1.192 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m1.060 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.556 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.387 ms - -[0m
+[0mGET / [36m304 [0m1.150 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.454 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m1.108 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m1.194 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.738 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.504 ms - -[0m
+[0mGET /admin/i18n/readme.txt [33m404 [0m1.527 ms - 2529[0m
+[0mGET /robots.txt [33m404 [0m1.292 ms - 2529[0m
+[0mGET / [32m200 [0m0.796 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m5.339 ms - 13413[0m
+[0mGET / [32m200 [0m0.909 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.352 ms - 13413[0m
+[0mGET / [32m200 [0m0.761 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.722 ms - 13413[0m
+[0mGET /Octy [33m404 [0m1.989 ms - 2529[0m
+[0mPOST /login.action [33m404 [0m156.219 ms - 2529[0m
+[0mGET /vtigercrm/ [33m404 [0m1.209 ms - 2529[0m
+[0mGET /phpmyadmin/scripts/setup.php [33m404 [0m1.759 ms - 2529[0m
+[0mGET / [32m200 [0m0.970 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.671 ms - 13413[0m
+[0mGET /w00tw00t.at.blackhats.romanian.anti-sec:) [33m404 [0m0.878 ms - 2529[0m
+[0mGET /phpMyAdmin/scripts/setup.php [33m404 [0m0.933 ms - 2529[0m
+[0mGET /phpmyadmin/scripts/setup.php [33m404 [0m0.899 ms - 2529[0m
+[0mGET /pma/scripts/setup.php [33m404 [0m1.114 ms - 2529[0m
+[0mGET /myadmin/scripts/setup.php [33m404 [0m0.920 ms - 2529[0m
+[0mGET /MyAdmin/scripts/setup.php [33m404 [0m0.935 ms - 2529[0m
+[0mGET http://www.qyer.com/ [32m200 [0m0.795 ms - 4153[0m
+[0mGET /cgi-bin/php4 [33m404 [0m1.323 ms - 2529[0m
+[0mGET /cgi-bin/php5 [33m404 [0m0.751 ms - 2529[0m
+[0mGET / [32m200 [0m0.553 ms - 4153[0m
+[0mGET /index.cgi [33m404 [0m2.623 ms - 2529[0m
+[0mGET /cgi-bin/php [33m404 [0m0.827 ms - 2529[0m
+[0mGET /cgi-bin/php5-cli [33m404 [0m0.944 ms - 2529[0m
+[0mGET /phppath/cgi_wrapper [33m404 [0m0.787 ms - 2529[0m
+[0mGET /phppath/php [33m404 [0m0.767 ms - 2529[0m
+[0mGET /cgi-sys/php5 [33m404 [0m0.594 ms - 2529[0m
+[0mGET /cgi-bin/php.fcgi [33m404 [0m1.732 ms - 2529[0m
+[0mGET /cgi-bin/index.cgi [33m404 [0m0.776 ms - 2529[0m
+[0mPOST /index.login.action [33m404 [0m553.656 ms - 2529[0m
+[0mGET /robots.txt [33m404 [0m2.337 ms - 2529[0m
+[0mGET /imgs/yearcircler.png [33m404 [0m0.773 ms - 2529[0m
+[0mGET / [32m200 [0m0.803 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.861 ms - 13413[0m
+[0mGET /images/neuron-draw.png [32m200 [0m0.782 ms - 22264[0m
+[0mGET /images/octy.svg [32m200 [0m14.466 ms - 31138[0m
+[0mGET /images/coffee_stain.png [32m200 [0m0.654 ms - 17976[0m
+[0mGET /images/github-mark.svg [32m200 [0m33.138 ms - 2150[0m
+[0mGET /robots.txt [33m404 [0m0.782 ms - 2529[0m
+[0mGET / [32m200 [0m0.682 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.618 ms - 13413[0m
+[0mGET / [32m200 [0m1.184 ms - 4153[0m
+[0mHEAD /redirect.php [33m404 [0m0.840 ms - 2529[0m
+[0mPOST /adminManager!login [33m404 [0m239.267 ms - 2529[0m
+[0mGET / [32m200 [0m1.292 ms - 4153[0m
+[0mGET / [32m200 [0m2.965 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.643 ms - 13413[0m
+[0mGET /images/neuron-draw.png [32m200 [0m2.868 ms - 22264[0m
+[0mGET /images/octy.svg [32m200 [0m2.324 ms - 31138[0m
+[0mGET /images/coffee_stain.png [32m200 [0m0.836 ms - 17976[0m
+[0mGET /images/github-mark.svg [32m200 [0m0.834 ms - 2150[0m
+[0mGET / [36m304 [0m0.994 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.557 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m0.577 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m0.348 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.568 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.451 ms - -[0m
+[0mGET / [36m304 [0m1.298 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.508 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m0.540 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m0.357 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.556 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.371 ms - -[0m
+[0mGET / [32m200 [0m0.853 ms - 4153[0m
+[0mGET /manager/html [33m404 [0m0.901 ms - 2529[0m
+[0mGET / [32m200 [0m0.833 ms - 4153[0m
+[0mGET / [32m200 [0m0.841 ms - 4153[0m
+[0mGET / [32m200 [0m1.515 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.423 ms - 13413[0m
+[0mHEAD / [32m200 [0m1.593 ms - 4153[0m
+[0mGET / [32m200 [0m0.785 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.898 ms - 13413[0m
+[0mGET / [32m200 [0m0.561 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.788 ms - 13413[0m
+[0mGET / [32m200 [0m0.972 ms - 4153[0m
+[0mPOST /loginUI.action [33m404 [0m303.294 ms - 2529[0m
+[0mGET / [32m200 [0m0.653 ms - 4153[0m
+[0mGET / [32m200 [0m1.791 ms - 4153[0m
+[0mHEAD / [32m200 [0m0.641 ms - 4153[0m
+[0mGET /view/index.shtml [33m404 [0m0.913 ms - 2529[0m
+[0mGET /operator/basic.shtml [33m404 [0m1.304 ms - 2529[0m
+[0mGET /setup [33m404 [0m0.769 ms - 2529[0m
+[0mGET /secure/ltx_conf.htm [33m404 [0m0.843 ms - 2529[0m
+[0mGET /syslog.htm [33m404 [0m2.601 ms - 2529[0m
+[0mGET /login [33m404 [0m0.786 ms - 2529[0m
+[0mGET / [32m200 [0m0.776 ms - 4153[0m
+[0mGET / [32m200 [0m0.874 ms - 4153[0m
+[0mGET / [32m200 [0m1.170 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.455 ms - 13413[0m
+[0mGET /images/octy.svg [32m200 [0m2.543 ms - 31138[0m
+[0mGET /images/github-mark.svg [32m200 [0m0.844 ms - 2150[0m
+[0mGET /images/neuron-draw.png [32m200 [0m0.578 ms - 22264[0m
+[0mGET /images/coffee_stain.png [32m200 [0m0.758 ms - 17976[0m
+[0mGET /images/neuron-draw.png [32m200 [0m0.826 ms - 22264[0m
+[0mGET /images/octy.svg [32m200 [0m0.742 ms - 31138[0m
+[0mGET /images/neuron-draw.png [32m200 [0m0.808 ms - 22264[0m
+[0mGET /blog [32m200 [0m234.923 ms - 6078[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.579 ms - -[0m
+[0mGET /javascripts/infinite-scrolling.js [32m200 [0m0.871 ms - 1090[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.461 ms - -[0m
+[0mGET / [36m304 [0m0.767 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.854 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m0.972 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m0.446 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.904 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.893 ms - -[0m
+[0mGET / [32m200 [0m0.644 ms - 4153[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.017 ms - 13413[0m
+[0mGET /images/octy.svg [32m200 [0m0.667 ms - 31138[0m
+[0mGET /images/neuron-draw.png [32m200 [0m8.042 ms - 22264[0m
+[0mGET /images/coffee_stain.png [32m200 [0m4.919 ms - 17976[0m
+[0mGET /images/github-mark.svg [32m200 [0m0.698 ms - 2150[0m
+[0mGET /blog [32m200 [0m3.251 ms - 6078[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.500 ms - -[0m
+[0mGET /javascripts/infinite-scrolling.js [32m200 [0m10.486 ms - 1090[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.604 ms - -[0m
+[0mPOST /blog [32m200 [0m27.314 ms - 817[0m
+[0mGET /blog/Postquam-alumnus [32m200 [0m48.026 ms - 6635[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [32m200 [0m5.299 ms - 922[0m
+[0mGET /blog/Postquam-alumnus [36m304 [0m2.944 ms - -[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [36m304 [0m0.511 ms - -[0m
+[0mGET /blog/JavaScript-highlighting [32m200 [0m2.331 ms - 2819[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [36m304 [0m0.733 ms - -[0m
+[0mPOST /blog [32m204 [0m1.774 ms - -[0m
+[0mGET /blog/Kingdom-Hearts-II [32m200 [0m1.977 ms - 4261[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [36m304 [0m0.976 ms - -[0m
+[0mGET /about [32m200 [0m1.326 ms - 4153[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.849 ms - -[0m
+[0mGET /images/octy.svg [36m304 [0m0.534 ms - -[0m
+[0mGET /images/neuron-draw.png [36m304 [0m1.106 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.702 ms - -[0m
+[0mGET /images/github-mark.svg [36m304 [0m0.493 ms - -[0m
+[0mGET /blog [32m200 [0m2.486 ms - 6078[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.587 ms - -[0m
+[0mGET /javascripts/infinite-scrolling.js [36m304 [0m0.469 ms - -[0m
+[0mGET /images/coffee_stain.png [36m304 [0m0.473 ms - -[0m
+[0mPOST /blog [32m200 [0m1.897 ms - 817[0m
+[0mGET /blog/HMS-Warrior-1860 [32m200 [0m1.392 ms - 3763[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [36m304 [0m0.619 ms - -[0m
+[0mGET /blog/HMS-Warrior-1860 [36m304 [0m3.216 ms - -[0m
+[0mGET /stylesheets/highlightjs/github-gist.css [36m304 [0m0.669 ms - -[0m
+
+npm ERR! Linux 2.6.32-042stab094.7
+npm ERR! argv "node" "/usr/local/bin/npm" "start"
+npm ERR! node v0.10.25
+npm ERR! npm  v3.5.3
+npm ERR! code ELIFECYCLE
+npm ERR! jeroendelcour@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 143
+npm ERR! 
+npm ERR! Failed at the jeroendelcour@0.0.0 start script 'node ./bin/www'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the jeroendelcour package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node ./bin/www
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs jeroendelcour
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls jeroendelcour
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /root/nodejs/npm-debug.log

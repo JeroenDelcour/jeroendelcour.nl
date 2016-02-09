@@ -49,8 +49,8 @@ module.exports = {
     var db = new sqlite3.Database(dbfile);
 
     db.get("SELECT * FROM articles WHERE slug='"+slug+"'", function(error, row) {
-      if (error) {
-        callback(error);
+      if (error | row == undefined) {
+        callback(error, row);
       } else {
         var date = new Date(row.published);
         row.published = dateformat(date, dateMask);

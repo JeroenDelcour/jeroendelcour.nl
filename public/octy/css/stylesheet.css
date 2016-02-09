@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'komikaX-black';
+    src: url('../assets/fonts/komikax_-webfont.ttf');
+}
+
+body {
+    margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+    background: #FEEDE6;
+    font-size: 100%;
+}
+
+#phone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    text-align: center;
+    
+    border: 0.15rem solid #FB9B78;
+    border-radius: 1rem;
+    /*padding: 20px 10px 0 10px;*/
+    background: black;
+}
+
+#phone #screen {
+    margin: 20px 10px 10px 10px;
+    max-height: 500px;
+}
+
+#phone .backButton {
+    margin: 0 10px 10px 10px;
+    opacity: 0.2;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+#phone .backButton:hover {
+    opacity: 1;
+}
+
+#orientation {
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/orientation.jpg); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(0, 0, 0);
+    z-index: 999;
+    display: none;
+}

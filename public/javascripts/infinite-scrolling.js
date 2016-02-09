@@ -5,7 +5,7 @@ var infiniteScrolling = {
 		if (!infiniteScrolling.blocked){
 			document.getElementById("loading").innerHTML = 'Loading more...<div id="arrow">↓</div>';
 			var margin = 50;
-			if (document.documentElement.scrollTop >= document.body.scrollHeight - window.innerHeight - margin) {
+			if (document.documentElement.scrollTop || document.body.scrollTop >= document.body.scrollHeight - window.innerHeight - margin) {
 				// you're at the bottom of the page
 				xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {

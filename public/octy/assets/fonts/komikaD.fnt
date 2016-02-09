@@ -1,0 +1,60 @@
+<font>
+  <info face="komikaD" size="32" bold="0" italic="0" charset="" unicode="" stretchH="100" smooth="1" aa="1" padding="2,2,2,2" spacing="0,0" outline="0"/>
+  <common lineHeight="38" base="23" scaleW="73" scaleH="225" pages="1" packed="0"/>
+  <pages>
+    <page id="0" file="komikaD.png"/>
+  </pages>
+  <chars count="27">
+    <char id="97" x="2" y="2" width="15" height="18" xoffset="0" yoffset="6" xadvance="15" page="0" chnl="15"/>
+    <char id="98" x="2" y="22" width="15" height="21" xoffset="1" yoffset="2" xadvance="15" page="0" chnl="15"/>
+    <char id="99" x="2" y="45" width="16" height="17" xoffset="1" yoffset="6" xadvance="15" page="0" chnl="15"/>
+    <char id="100" x="19" y="2" width="17" height="23" xoffset="1" yoffset="0" xadvance="16" page="0" chnl="15"/>
+    <char id="101" x="2" y="64" width="14" height="17" xoffset="1" yoffset="6" xadvance="14" page="0" chnl="15"/>
+    <char id="102" x="2" y="83" width="14" height="24" xoffset="1" yoffset="0" xadvance="10" page="0" chnl="15"/>
+    <char id="103" x="2" y="109" width="16" height="22" xoffset="1" yoffset="6" xadvance="15" page="0" chnl="15"/>
+    <char id="104" x="18" y="64" width="14" height="23" xoffset="1" yoffset="0" xadvance="13" page="0" chnl="15"/>
+    <char id="105" x="20" y="27" width="7" height="22" xoffset="1" yoffset="1" xadvance="6" page="0" chnl="15"/>
+    <char id="106" x="29" y="27" width="12" height="26" xoffset="-3" yoffset="1" xadvance="7" page="0" chnl="15"/>
+    <char id="107" x="38" y="2" width="15" height="23" xoffset="1" yoffset="1" xadvance="14" page="0" chnl="15"/>
+    <char id="108" x="2" y="133" width="7" height="23" xoffset="1" yoffset="1" xadvance="6" page="0" chnl="15"/>
+    <char id="109" x="18" y="89" width="19" height="17" xoffset="1" yoffset="6" xadvance="19" page="0" chnl="15"/>
+    <char id="110" x="34" y="55" width="15" height="17" xoffset="1" yoffset="6" xadvance="14" page="0" chnl="15"/>
+    <char id="111" x="43" y="27" width="15" height="16" xoffset="1" yoffset="6" xadvance="15" page="0" chnl="15"/>
+    <char id="112" x="55" y="2" width="16" height="22" xoffset="0" yoffset="6" xadvance="15" page="0" chnl="15"/>
+    <char id="113" x="2" y="158" width="16" height="22" xoffset="1" yoffset="5" xadvance="15" page="0" chnl="15"/>
+    <char id="114" x="11" y="133" width="13" height="18" xoffset="1" yoffset="5" xadvance="11" page="0" chnl="15"/>
+    <char id="115" x="20" y="108" width="14" height="18" xoffset="1" yoffset="5" xadvance="15" page="0" chnl="15"/>
+    <char id="116" x="2" y="182" width="13" height="21" xoffset="1" yoffset="3" xadvance="11" page="0" chnl="15"/>
+    <char id="117" x="2" y="205" width="14" height="18" xoffset="1" yoffset="6" xadvance="13" page="0" chnl="15"/>
+    <char id="118" x="17" y="182" width="14" height="19" xoffset="1" yoffset="5" xadvance="13" page="0" chnl="15"/>
+    <char id="119" x="20" y="153" width="19" height="18" xoffset="1" yoffset="5" xadvance="18" page="0" chnl="15"/>
+    <char id="120" x="26" y="128" width="16" height="18" xoffset="1" yoffset="6" xadvance="14" page="0" chnl="15"/>
+    <char id="121" x="39" y="74" width="15" height="22" xoffset="0" yoffset="5" xadvance="13" page="0" chnl="15"/>
+    <char id="122" x="51" y="45" width="15" height="19" xoffset="0" yoffset="6" xadvance="14" page="0" chnl="15"/>
+    <char id="58" x="60" y="26" width="5" height="17" xoffset="1" yoffset="6" xadvance="4" page="0" chnl="15"/>
+    <char id="32" x="0" y="0" width="0" height="0" xoffset="1" yoffset="6" xadvance="8" page="0" chnl="15"/>
+  </chars>
+  <kernings count="21">
+    <kerning first="102" second="97" amount="-1"/>
+    <kerning first="102" second="99" amount="0"/>
+    <kerning first="102" second="100" amount="-1"/>
+    <kerning first="102" second="101" amount="-1"/>
+    <kerning first="102" second="103" amount="-1"/>
+    <kerning first="102" second="112" amount="-1"/>
+    <kerning first="102" second="113" amount="-1"/>
+    <kerning first="102" second="120" amount="-1"/>
+    <kerning first="102" second="122" amount="-1"/>
+    <kerning first="111" second="104" amount="1"/>
+    <kerning first="111" second="120" amount="-1"/>
+    <kerning first="111" second="122" amount="-1"/>
+    <kerning first="112" second="104" amount="1"/>
+    <kerning first="112" second="120" amount="-1"/>
+    <kerning first="112" second="122" amount="-1"/>
+    <kerning first="113" second="104" amount="1"/>
+    <kerning first="114" second="102" amount="1"/>
+    <kerning first="117" second="58" amount="2"/>
+    <kerning first="120" second="102" amount="1"/>
+    <kerning first="121" second="102" amount="1"/>
+    <kerning first="121" second="112" amount="0"/>
+  </kernings>
+</font>

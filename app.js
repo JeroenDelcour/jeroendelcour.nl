@@ -1,5 +1,4 @@
-var express = require('express');
-var path = require('path');
+var express = require('express'); var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 // var cookieParser = require('cookie-parser'); // not sure if needed
@@ -8,7 +7,6 @@ var dateformat = require('dateformat');
 
 var articleProvider = require("./articleprovider");
 var authorized = require("./authorization");
-
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +31,12 @@ app.get('/about', function(req, res, next) {
 app.route('/blog')
 	.get(function(req, res){
 		articleProvider.getArticles(articlesPerRequest, 0, function(error, rows){
+			if (error | rows == undefined) {
+				res.statusCode = 500;
+				res.end;
+			} else {
 				res.render('blog', {title: 'Jeroen Delcour', articles: rows});
+			}
 		});
 	})
 	.post(function(req, res){
@@ -71,10 +74,19 @@ app.route('/blog/draft')
 		}
 	});
 
-app.get('/blog/:slug', function(req, res) {
+app.get('/blog/:slug', function(req, res, next) {
 	var slug = req.params.slug;
 	articleProvider.findBySlug(slug, function(error, row){
-		res.render('blog-article', { post: row });
+		if (error) {
+			res.statusCode = 500;
+			res.end();
+		} else if (row == undefined) {
+			err = new Error('Not found');
+			err.status = 404;
+			next(err);
+		} else {
+			res.render('blog-article', { post: row });
+		};
 	});
 });
 
