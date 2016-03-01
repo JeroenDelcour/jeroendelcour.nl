@@ -1,0 +1,3 @@
+[submodule "public/YearCircler"]
+	path = public/YearCircler
+	url = https://github.com/JeroenDelcour/YearCircler
