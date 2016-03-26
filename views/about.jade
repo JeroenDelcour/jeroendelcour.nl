@@ -1,21 +1,17 @@
 extends layout
 
 block content
-	h1 About
-	p
-		| Hi, I'm Jeroen Delcour. I dabble in programming, web design, video game development, and general geekiness.
-	p
-		| Over time, these hobbies have resulted in a modest collection of programming doodads, web design thingamajigs, video game development tomfoolery, and general geeky gismos. A word of warning: some of these are highly experimental and liable to explode (a.k.a. buggy).
 
+	p.intro
+		| Hi, I'm Jeroen. Here are some of the things I've made or am making.
 
-	h1 Projects
 
 	section.project-list
 		ul
 			li
 				h2
 					a(href='/octy', target='_blank') Octy
-					|  (work in progress)
+					|  (unfinished)
 				a.img-link(href='/octy', target='_blank')
 					img(src="images/octy.svg")
 				p
@@ -25,7 +21,7 @@ block content
 					|  (work-in-progress version) and on 
 					a(href='https://www.microsoft.com/en-us/store/apps/octy/9nblggh0j563', target='_blank') Windows Phone
 					|  (old version built with Construct 2), but I do plan to release it on Android and possibly iPhone some day.
-			hr
+			
 			li
 				h2
 					a(href='/neuron-draw', target='_blank') Neuron draw
@@ -36,7 +32,7 @@ block content
 					a(href='https://en.wikipedia.org/wiki/Santiago_Ram%C3%B3n_y_Cajal', target='_blank') Santiago Ramón y Cajal
 					| , who was one of the first to make detailed drawings of neurons.
 				a.github(href='https://github.com/JeroenDelcour/neuron-draw', target='_blank') source
-			hr
+			
 			li
 				h2
 					a(href='/YearCircler', target='_blank') Year Circler
