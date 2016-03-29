@@ -4,6 +4,9 @@ authorization.js
 # database
 blog.db
 
+# data
+*.csv
+
 # Logs
 logs
 *.log
