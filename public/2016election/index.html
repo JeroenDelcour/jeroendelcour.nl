@@ -48,8 +48,8 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		d.tweets = +d.tweets
 	});
 
-	viewLength = (new Date() - data[0].date) / (60*60*48 * 1000);
-	viewLengthPixels = viewLength * viewWidth;
+	pixelsPerDatapoint = 5
+	viewLengthPixels = pixelsPerDatapoint * data.length;
 
 	var vis = d3.select("#visualisation"),
 		WIDTH = viewLengthPixels,
@@ -81,7 +81,7 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 	var xAxis = d3.svg.axis()
 		.scale(xScale)         // x is the d3.time.scale()
 		.orient('top') // the ticks go above the graph
-		.ticks(5*viewLength);        // specify the number of ticks
+		.ticks(viewLengthPixels / viewWidth * 5);        // specify the number of ticks
 
 	var yAxis = d3.svg.axis()
 		.scale(yScale)
