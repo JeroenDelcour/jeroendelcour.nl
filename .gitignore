@@ -6,6 +6,7 @@ blog.db
 
 # data
 *.csv
+*.json
 
 # Logs
 logs
