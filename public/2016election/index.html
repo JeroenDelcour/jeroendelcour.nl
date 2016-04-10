@@ -23,18 +23,23 @@
 <h2>Live sentiment analysis on the public Twitter stream (updates every 10 minutes)</h2>
 
 <figure class="plotContainer">
-	<div id="plot" class=item>
-		<svg id="visualisation" width="1000" height="300"></svg>
+	<div id="legend">
+		<span class="label Sanders">• Sanders</span>
+		<span class="label Trump">• Trump</span>
+		<span class="label Clinton">• Clinton</span>
+		<span class="label Cruz">• Cruz</span>
 	</div>
-	<svg id="yAxis" class="item">
+	<svg id="yAxis">
+	<div id="plot">
+		<svg id="sentiment" width="1000" height="300"></svg>
+		<svg id="tweetsPerSecond" width="1000" height="150"></svg>
+	</div>
 	</svg>
 </figure>
 
 </main>
 
 <script>
-
-var viewWidth = document.getElementById("plot").clientWidth;
 
 d3.csv('data_cruz_downsampled.csv', function(error, data) {
 
@@ -48,11 +53,10 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		d.tweets = +d.tweets
 	});
 
-	pixelsPerDatapoint = 5
+	pixelsPerDatapoint = 2
 	viewLengthPixels = pixelsPerDatapoint * data.length;
 
-	var vis = d3.select("#visualisation"),
-		WIDTH = viewLengthPixels,
+	var WIDTH = viewLengthPixels,
 		HEIGHT = 300,
 		MARGINS = {
 			top: 20,
@@ -60,10 +64,14 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 			bottom: 20,
 			left: 50
 		}
+
+	var vis = d3.select("#sentiment")
+	var tps = d3.select("#tweetsPerSecond")
 	var yAxisEl = d3.select('#yAxis');
 
-	var plot = document.getElementById("visualisation");
+	var plot = document.getElementById("sentiment");
 	plot.setAttribute("width", viewLengthPixels);
+	document.getElementById("tweetsPerSecond").setAttribute("width", viewLengthPixels);
 
 	document.getElementById("plot").scrollLeft = viewLengthPixels;
 
@@ -72,11 +80,15 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		  data[0].date,
 		  new Date()
 		])
-		.range([MARGINS.left, WIDTH - MARGINS.right]);
+		.range([0, WIDTH - MARGINS.right]);
 
 	var yScale = d3.scale.linear()
-	  .domain([-0.5, 0.5])
-	  .range([HEIGHT - MARGINS.top, MARGINS.bottom]); // Seems backwards because SVG is y-down
+		.domain([-0.5, 0.5])
+		.range([HEIGHT - MARGINS.top, 0]); // Seems backwards because SVG is y-down
+
+	var yScaleTps = d3.scale.linear()
+		.domain([0, 10])
+		.range([150 - MARGINS.bottom, 0])
 
 	var xAxis = d3.svg.axis()
 		.scale(xScale)         // x is the d3.time.scale()
@@ -88,13 +100,28 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		.orient('left')
 		.ticks(5);
 
+	var yAxisTps = d3.svg.axis()
+		.scale(yScaleTps)
+		.orient('left')
+		.ticks(5)
+
 	var lineGen = d3.svg.line()
 		.defined(function(d){ return d.mood; })
 		.x(function(d) {
-		return xScale(d.date);
+			return xScale(d.date);
 		})
 		.y(function(d) {
-		return yScale(d.mood);
+			return yScale(d.mood);
+		})
+		.interpolate("basis");
+
+	var lineGenTps = d3.svg.line()
+		.defined(function(d){ return d.mood; })
+		.x(function(d) {
+			return xScale(d.date);
+		})
+		.y(function(d) {
+			return yScaleTps(d.tweets / 10 / 60);
 		})
 		.interpolate("basis");
 
@@ -113,20 +140,41 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		.attr("transform", "translate(" + (MARGINS.left) + ",0)")
 		.call(yAxis);            // let the axis do its thing
 
-	// vis.append("text")
-	// 	.attr("class", "y label")
-	// 	.attr("text-anchor", "middle")
-	// 	.attr("y", MARGINS.left - 50)
-	// 	.attr("x", -HEIGHT/2)
-	// 	.attr("dy", ".75em")
-	// 	.attr("transform", "rotate(-90)")
-	// 	.text("Sentiment");
+	yAxisEl.append("text")
+		.attr("class", "y label")
+		.attr("text-anchor", "middle")
+		.attr("y", MARGINS.left - 45)
+		.attr("x", -HEIGHT/2)
+		.attr("dy", ".75em")
+		.attr("transform", "rotate(-90)")
+		.text("Sentiment");
+
+	yAxisEl.append('g')
+		.attr("class","axis")
+		.attr("transform", "translate(" + (MARGINS.left) + "," + (HEIGHT) + ")")
+		.call(yAxisTps);
+
+	yAxisEl.append("text")
+		.attr("class", "y label")
+		.attr("text-anchor", "middle")
+		.attr("y", MARGINS.left - 45)
+		.attr("x", -HEIGHT - (150/2))
+		.attr("dy", ".75em")
+		.attr("transform", "rotate(-90)")
+		.text("Tweets per second");
 
 	vis.append('svg:path')
 		.attr('d', lineGen(data))
 		.attr('stroke', 'orange')
-		.attr('stroke-width', 2)
+		.attr('stroke-width', 1)
 		.attr('fill', 'none');
+
+	tps.append('svg:path')
+		.attr('d', lineGenTps(data))
+		.attr('stroke', 'orange')
+		.attr('stroke-width', 1)
+		.attr('fill', 'none')
+		.style("stroke-dasharray", ("1, 1"));
 
 	d3.csv('data_clinton_downsampled.csv', function(error, data2) {
 
@@ -142,8 +190,15 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		vis.append('svg:path')
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'green')
-			.attr('stroke-width', 2)
+			.attr('stroke-width', 1)
 			.attr('fill', 'none');
+
+		tps.append('svg:path')
+			.attr('d', lineGenTps(data2))
+			.attr('stroke', 'green')
+			.attr('stroke-width', 1)
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("1, 1"));
 
 	});
 
@@ -162,8 +217,15 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		vis.append('svg:path')
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'red')
-			.attr('stroke-width', 2)
+			.attr('stroke-width', 1)
 			.attr('fill', 'none');
+
+		tps.append('svg:path')
+			.attr('d', lineGenTps(data2))
+			.attr('stroke', 'red')
+			.attr('stroke-width', 1)
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("1, 1"));
 
 	});
 
@@ -182,41 +244,48 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		vis.append('svg:path')
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'blue')
-			.attr('stroke-width', 2)
+			.attr('stroke-width', 1)
 			.attr('fill', 'none');
+
+		tps.append('svg:path')
+			.attr('d', lineGenTps(data2))
+			.attr('stroke', 'blue')
+			.attr('stroke-width', 1)
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("1, 1"));
 
 	});
 
-	candidates = [
-		{
-			name: 'Sanders',
-			color: 'blue'
-		},
-		{
-			name: 'Trump',
-			color: 'red'
-		},
-		{
-			name: 'Clinton',
-			color: 'green'
-		},
-		{
-			name: 'Cruz',
-			color: 'orange'
-		}
-	]
+	// candidates = [
+	// 	{
+	// 		name: 'Sanders',
+	// 		color: 'blue'
+	// 	},
+	// 	{
+	// 		name: 'Trump',
+	// 		color: 'red'
+	// 	},
+	// 	{
+	// 		name: 'Clinton',
+	// 		color: 'green'
+	// 	},
+	// 	{
+	// 		name: 'Cruz',
+	// 		color: 'orange'
+	// 	}
+	// ]
 
-	yAxisEl.append('g')
-		.attr('class', 'legend')
-		.selectAll('text')
-		.data(candidates)
-		  .enter()
-		    .append('text')
-		      .text(function(d) { return '• ' + d.name; })
-		      .attr('class', 'legendText')
-		      .attr('fill', function(d) { return d.color; })
-		      .attr('y', function(d, i) { return MARGINS.top + (20 * (i + 1)); })
-		      .attr('x', MARGINS.left + 10)
+	// yAxisEl.append('g')
+	// 	.attr('class', 'legend')
+	// 	.selectAll('text')
+	// 	.data(candidates)
+	// 	  .enter()
+	// 	    .append('text')
+	// 	      .text(function(d) { return '• ' + d.name; })
+	// 	      .attr('class', 'legendText')
+	// 	      .attr('fill', function(d) { return d.color; })
+	// 	      .attr('y', function(d, i) { return MARGINS.top + (20 * (i + 1)); })
+	// 	      .attr('x', MARGINS.left + 10)
 
 });
 
