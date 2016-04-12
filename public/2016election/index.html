@@ -20,7 +20,7 @@
 <main>
 
 <h1>How Twitter feels about the 2016 USA presidential candidates</h1>
-<h2>Live sentiment analysis on the public Twitter stream (updates every 10 minutes)</h2>
+<h2>Live sentiment analysis on the public Twitter stream (updates every 30 minutes)</h2>
 
 <figure class="plotContainer">
 	<div id="legend">
@@ -55,7 +55,7 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 		d.tweets = +d.tweets
 	});
 
-	pixelsPerDatapoint = 2
+	pixelsPerDatapoint = 4
 	viewLengthPixels = pixelsPerDatapoint * data.length;
 
 	var WIDTH = viewLengthPixels,
@@ -123,7 +123,7 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 			return xScale(d.date);
 		})
 		.y(function(d) {
-			return yScaleTps(d.tweets / 10 / 60);
+			return yScaleTps(d.tweets / 60 / 30);
 		})
 		.interpolate("basis");
 
@@ -293,7 +293,7 @@ d3.csv('data_cruz_downsampled.csv', function(error, data) {
 
 var refreshTimer = setInterval(function(){
 	location.reload();
-}, 1000 * 60 * 10); // refresh every 10 minutes
+}, 1000 * 60 * 30); // refresh every 30 minutes
 </script>
 
 </body>
