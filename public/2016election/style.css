@@ -104,6 +104,15 @@ svg {
 	overflow: visible;
 }
 
+.viralTweetCircle {
+	cursor: pointer;
+}
+#viralTWeet {
+	position: absolute;
+	transform: translateY(-50%);
+	cursor: default;
+}
+
 #legend {
 	width: 100%;
 	text-align: center;
