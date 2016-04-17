@@ -2,7 +2,8 @@
 authorization.js
 
 # database
-blog.db
+*.db
+*.sqlite
 
 # data
 *.csv
