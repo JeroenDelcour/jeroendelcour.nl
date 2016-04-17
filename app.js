@@ -7,6 +7,8 @@ var dateformat = require('dateformat');
 
 var articleProvider = require("./articleprovider");
 var authorized = require("./authorization");
+var electionData = require("./2016election");
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -87,6 +89,18 @@ app.get('/blog/:slug', function(req, res, next) {
 		} else {
 			res.render('blog-article', { post: row });
 		};
+	});
+});
+
+app.get('/2016election/data/:candidate', function(req, res) {
+	var candidate = req.params.candidate;
+	electionData.getData(candidate, function(error, data) {
+		if (error) {
+			res.statusCode = 500;
+			res.end();
+		} else {
+			res.send(data);
+		}
 	});
 });
 
