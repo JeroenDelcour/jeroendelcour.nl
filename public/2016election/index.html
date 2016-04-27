@@ -132,7 +132,7 @@ d3.csv('data/cruz', function(error, data) {
 		d.tweet_count = +d.tweet_count
 	});
 
-	pixelsPerDatapoint = 4
+	pixelsPerDatapoint = 5;
 	viewLengthPixels = pixelsPerDatapoint * data.length;
 
 	var WIDTH = viewLengthPixels,
@@ -200,7 +200,7 @@ d3.csv('data/cruz', function(error, data) {
 			return xScale(d.datetime);
 		})
 		.y(function(d) {
-			return yScaleTps(d.tweet_count / 60 / 30);
+			return yScaleTps(d.tweet_count / 60 / 60 / 2);
 		})
 		.interpolate("basis");
 

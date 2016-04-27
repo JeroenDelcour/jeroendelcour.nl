@@ -138,7 +138,7 @@ d3.csv('data/cruz', function(error, data) {
 	});
 	means.push({'candidate': 'Cruz', 'mean': sentimentSum / data.length, 'color': 'orange'});
 
-	pixelsPerDatapoint = 4
+	pixelsPerDatapoint = 5;
 	viewLengthPixels = pixelsPerDatapoint * data.length;
 
 	var WIDTH = viewLengthPixels,
@@ -206,14 +206,14 @@ d3.csv('data/cruz', function(error, data) {
 			return xScale(d.datetime);
 		})
 		.y(function(d) {
-			return yScaleTps(d.tweet_count / 60 / 30);
+			return yScaleTps(d.tweet_count / 60 / 60 / 2);
 		})
 		.interpolate("basis");
 
 	vis.append('line')
 		.attr({ x1: 0, y1: yScale(0), x2: viewLengthPixels, y2: yScale(0) })
 		.style("stroke-dasharray", ("5, 5"))
-		.style("stroke", "#CCC");
+		.style("stroke", "#888");
 
 	vis.append('g')            // create a <g> element
 		.attr("class","axis")
@@ -252,7 +252,8 @@ d3.csv('data/cruz', function(error, data) {
 		.attr('d', lineGen(data))
 		.attr('stroke', 'orange')
 		.attr('stroke-width', 1)
-		.attr('fill', 'none');
+		.attr('fill', 'none')
+		.style("stroke-dasharray", ("4, 1"));
 
 	tps.append('svg:path')
 		.attr('d', lineGenTps(data))
@@ -285,7 +286,9 @@ d3.csv('data/cruz', function(error, data) {
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'green')
 			.attr('stroke-width', 1)
-			.attr('fill', 'none');
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("4, 1"));
+
 
 		tps.append('svg:path')
 			.attr('d', lineGenTps(data2))
@@ -320,7 +323,8 @@ d3.csv('data/cruz', function(error, data) {
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'red')
 			.attr('stroke-width', 1)
-			.attr('fill', 'none');
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("4, 1"));
 
 		tps.append('svg:path')
 			.attr('d', lineGenTps(data2))
@@ -355,7 +359,8 @@ d3.csv('data/cruz', function(error, data) {
 			.attr('d', lineGen(data2))
 			.attr('stroke', 'blue')
 			.attr('stroke-width', 1)
-			.attr('fill', 'none');
+			.attr('fill', 'none')
+			.style("stroke-dasharray", ("4, 1"));
 
 		tps.append('svg:path')
 			.attr('d', lineGenTps(data2))
