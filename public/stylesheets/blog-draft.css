@@ -1,4 +1,4 @@
-article h1 input {
+article h1 textarea {
 	border: 1px solid transparent;
 	width: 100%;
 	background: inherit;
@@ -6,7 +6,7 @@ article h1 input {
 	font-family: inherit;
 	font-weight: inherit;
 }
-article h1 input:hover, article h1 input:focus {
+article h1 textarea:hover, article h1 textarea:focus {
 	border: 1px dashed #888;
 }
 

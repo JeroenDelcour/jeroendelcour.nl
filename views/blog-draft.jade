@@ -11,9 +11,9 @@ block content
 		button( id="previewButton" onclick="preview()") Preview
 		form( method="post")
 			h1
-				input( type="text", name="title", id="editArticleTitle", placeholder="Title", required)
+				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title", required)
 			time(datetime= now, pubdate="pubdate")= now
-			textarea( rows=5 style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
+			textarea( rows=5, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
 			div( id="formatted" style="display: none;")
 			input( type="submit", value="Publish")
 
@@ -23,7 +23,7 @@ block content
 	script(type='text/javascript').
 		marked.setOptions({
 		  highlight: function (code) {
-		    return hljs.highlightAuto(code).value;
+			return hljs.highlightAuto(code).value;
 		  }
 		});
 
@@ -41,4 +41,16 @@ block content
 				formattedEl.style.display = 'none';
 				previewButton.innerHTML = 'Preview';
 			}
+		}
+
+		var textarea = document.getElementById('editArticleBody');
+		textarea.addEventListener('keydown', autosize);
+		var textarea = document.getElementById('editArticleTitle');
+		textarea.addEventListener('keydown', autosize);
+		function autosize(){
+			var el = this;
+			setTimeout(function(){
+				el.style.height = 'auto';
+				el.style.height = el.scrollHeight + 'px';
+			},0);
 		}
