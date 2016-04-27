@@ -87,7 +87,7 @@ app.get('/blog/:slug', function(req, res, next) {
 			err.status = 404;
 			next(err);
 		} else {
-			res.render('blog-article', { post: row });
+			res.render('blog-article', { post: row , title: row.title});
 		};
 	});
 });
