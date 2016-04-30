@@ -53,28 +53,46 @@ app.route('/blog')
 	});
 
 // needs to be called before app.get('/blog/:slug')
-app.route('/blog/draft')
-	.get(function(req, res){
-		if (authorized(req)){
-			res.render('blog-draft', { title: 'Draft | Jeroen Delcour', now: dateformat(new Date(), 'mmmm dS, yyyy')});
-		} else {
-			res.statusCode = 401;
-			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
-			res.end('Access denied');
-		}
-	})
-	.post(function(req, res){
-		var credentials = auth(req);
-		if (authorized(req)){
-			articleProvider.save(req.body, function(error, articleSlug){
-				res.redirect('/blog/'+articleSlug);
-			})
-		} else {
-			res.statusCode = 401;
-			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
-			res.end('Access denied');
-		}
-	});
+app.post('/blog/draft/save', function(req, res){
+	if (authorized(req)){
+		articleProvider.save(req.body, function(error, row){
+			if (error) {
+				res.statusCode = 500;
+				res.render('error', {
+					message: error.message,
+					error: error
+				});
+			} else {
+				res.statusCode = 200;
+				if (row) {
+					res.end(String(row.rowid));
+				} else {
+					res.end();
+				}
+			}
+		});
+	} else {
+		res.statusCode = 401;
+		res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
+		res.end('Access denied');
+	}
+});
+app.get('/blog/draft', function(req, res){
+	if (authorized(req)){
+		articleProvider.getDrafts(function(error, rows) {
+			if (error | rows == undefined) {
+				res.statusCode = 500;
+				res.end;
+			} else {
+				res.render('blog-draft', { title: 'Draft | Jeroen Delcour', drafts: rows, now: dateformat(new Date(), 'mmmm dS, yyyy')});
+			}
+		})
+	} else {
+		res.statusCode = 401;
+		res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
+		res.end('Access denied');
+	}
+});
 
 app.get('/blog/:slug', function(req, res, next) {
 	var slug = req.params.slug;

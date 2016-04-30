@@ -5,17 +5,23 @@ block append head
 	link(rel='stylesheet', href='/stylesheets/highlightjs/github-gist.css')
 
 block content
-	h1= Draft
+
+	form
+		select(id="draftSelect")
+			option(value= 'new') new
+			- each draft, index in drafts
+				option(value= index)= draft.title
 
 	article
 		button( id="previewButton" onclick="preview()") Preview
-		form( method="post")
+		form
 			h1
 				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title", required)
 			time(datetime= now, pubdate="pubdate")= now
 			textarea( rows=5, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
 			div( id="formatted" style="display: none;")
-			input( type="submit", value="Publish")
+			button( id="saveDraftButton", type="button") Save draft
+			button( id="publishButton", type="button") Publish
 
 	script(src="/javascripts/marked.min.js")
 	script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js")
@@ -43,10 +49,93 @@ block content
 			}
 		}
 
-		var textarea = document.getElementById('editArticleBody');
-		textarea.addEventListener('keydown', autosize);
-		var textarea = document.getElementById('editArticleTitle');
-		textarea.addEventListener('keydown', autosize);
+		var articleBody = document.getElementById('editArticleBody');
+		articleBody.addEventListener('keydown', autosize);
+		var articleTitle = document.getElementById('editArticleTitle');
+		articleTitle.addEventListener('keydown', autosize);
+		var draftSelect = document.getElementById('draftSelect');
+
+		var drafts =!{JSON.stringify(drafts)};
+
+		var currentDraft = draftSelect.value;
+		var unsaved = false;
+		articleBody.addEventListener('keydown', function(){
+			unsaved = true;
+		});
+		articleTitle.addEventListener('keydown', function(){
+			unsaved = true;
+		});
+		var draftButton = document.getElementById('saveDraftButton')
+
+		draftButton.addEventListener('click', function(e){
+			draftButton.innerHTML = 'Saving...';
+			if (currentDraft == 'new') {
+				drafts.push({
+					'rowid': 'new',
+					'created': new Date().getTime(),
+					'title': articleTitle.value,
+					'markdown': articleBody.value
+				})
+				var option = document.createElement("option");
+				option.value = drafts.length - 1;
+				option.text = articleTitle.title;
+				draftSelect.add(option);
+				draftSelect.value = option.value;
+				currentDraft = draftSelect.value;
+			}
+			sendDraft = {
+				'rowid': drafts[currentDraft].rowid,
+				'created': new Date().getTime(),
+				'title': articleTitle.value,
+				'markdown': articleBody.value
+			};
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4) {
+					if (xhttp.status == 200) {
+						if (currentDraft == 'new') {
+							drafts[drafts.length-1].rowid = xhttp.responseText;
+						} else {
+							drafts[currentDraft].title = sendDraft.title;
+							drafts[currentDraft].markdown = sendDraft.markdown;
+						}
+						unsaved = false;
+						draftButton.innerHTML = 'Saved.';
+						setTimeout(function(){
+							draftButton.innerHTML = 'Save';
+						},2000);
+					} else {
+						draftButton.innerHTML = 'Save';
+						window.alert(xhttp.responseText);
+					}
+				}
+			}
+			xhttp.open("POST", "/blog/draft/save", true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(JSON.stringify(sendDraft));
+		})
+
+		draftSelect.addEventListener('change', function(e) {
+			if (unsaved) {
+				var r = window.confirm('There are unsaved changes, are you sure you want to continue?');
+				if (!r) {
+					console.log(currentDraft);
+					console.log(e.value);
+					draftSelect.value = currentDraft;
+					console.log(draftSelect.value);
+					return false;
+				}
+			}
+			currentDraft = draftSelect.value;
+			if (e.target.value == 'new') {
+				articleTitle.value = '';
+				articleBody.value = '';
+			} else {
+				articleTitle.value = drafts[e.target.value].title;
+				articleBody.value = drafts[e.target.value].markdown;
+			}
+		});
+
 		function autosize(){
 			var el = this;
 			setTimeout(function(){
