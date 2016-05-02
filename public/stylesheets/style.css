@@ -257,6 +257,13 @@ cite a {
   color: #222;
 }
 
+
+article img {
+  max-width: 100%;
+}
+
+
+
 .comments .name {
   color: #cd6400;
 }

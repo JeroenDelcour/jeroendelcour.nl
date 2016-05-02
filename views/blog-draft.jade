@@ -18,7 +18,7 @@ block content
 			h1
 				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title", required)
 			time(datetime= now, pubdate="pubdate")= now
-			textarea( rows=5, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
+			textarea( rows=1, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
 			div( id="formatted" style="display: none;")
 			button( id="saveDraftButton", type="button") Save draft
 			button( id="publishButton", type="button") Publish
@@ -49,20 +49,18 @@ block content
 			}
 		}
 
-		var articleBody = document.getElementById('editArticleBody');
-		articleBody.addEventListener('keydown', autosize);
 		var articleTitle = document.getElementById('editArticleTitle');
-		articleTitle.addEventListener('keydown', autosize);
+		var articleBody = document.getElementById('editArticleBody');
 		var draftSelect = document.getElementById('draftSelect');
 
 		var drafts =!{JSON.stringify(drafts)};
 
 		var currentDraft = draftSelect.value;
 		var unsaved = false;
-		articleBody.addEventListener('keydown', function(){
+		articleBody.addEventListener('input', function(){
 			unsaved = true;
 		});
-		articleTitle.addEventListener('keydown', function(){
+		articleTitle.addEventListener('input', function(){
 			unsaved = true;
 		});
 		var draftButton = document.getElementById('saveDraftButton')
@@ -119,13 +117,11 @@ block content
 			if (unsaved) {
 				var r = window.confirm('There are unsaved changes, are you sure you want to continue?');
 				if (!r) {
-					console.log(currentDraft);
-					console.log(e.value);
 					draftSelect.value = currentDraft;
-					console.log(draftSelect.value);
 					return false;
 				}
 			}
+			unsaved = false;
 			currentDraft = draftSelect.value;
 			if (e.target.value == 'new') {
 				articleTitle.value = '';
@@ -134,12 +130,62 @@ block content
 				articleTitle.value = drafts[e.target.value].title;
 				articleBody.value = drafts[e.target.value].markdown;
 			}
+			calculateHeight(articleTitle);
+			calculateHeight(articleBody);
 		});
 
-		function autosize(){
-			var el = this;
-			setTimeout(function(){
-				el.style.height = 'auto';
-				el.style.height = el.scrollHeight + 'px';
-			},0);
+		var calculateContentHeight = function( ta, scanAmount ) {
+			var origHeight = ta.style.height,
+				height = ta.offsetHeight,
+				scrollHeight = ta.scrollHeight,
+				overflow = ta.style.overflow;
+			/// only bother if the ta is bigger than content
+			if ( height >= scrollHeight ) {
+				/// check that our browser supports changing dimension
+				/// calculations mid-way through a function call...
+				ta.style.height = (height + scanAmount) + 'px';
+				/// because the scrollbar can cause calculation problems
+				ta.style.overflow = 'hidden';
+				/// by checking that scrollHeight has updated
+				if ( scrollHeight < ta.scrollHeight ) {
+					/// now try and scan the ta's height downwards
+					/// until scrollHeight becomes larger than height
+					while (ta.offsetHeight >= ta.scrollHeight) {
+						ta.style.height = (height -= scanAmount)+'px';
+					}
+					/// be more specific to get the exact height
+					while (ta.offsetHeight < ta.scrollHeight) {
+						ta.style.height = (height++)+'px';
+					}
+					/// reset the ta back to it's original height
+					ta.style.height = origHeight;
+					/// put the overflow back
+					ta.style.overflow = overflow;
+					return height;
+				}
+			} else {
+				return scrollHeight;
+			}
 		}
+
+		var calculateHeight = function(el) {
+			if (el.target) { var ta = this; } else { var ta = el; }
+			var style = (window.getComputedStyle) ?
+				window.getComputedStyle(ta) : ta.currentStyle,
+
+			// This will get the line-height only if it is set in the css,
+			// otherwise it's "normal"
+			taLineHeight = parseInt(style.lineHeight, 10),
+			// Get the scroll height of the textarea
+			taHeight = calculateContentHeight(ta, taLineHeight),
+			// calculate the number of lines
+			numberOfLines = Math.ceil(taHeight / taLineHeight);
+			ta.rows = numberOfLines;
+
+			//- document.getElementById("lines").innerHTML = "there are " +
+			//- 	numberOfLines + " lines in the text area";
+		};
+		
+		taRows = articleBody.rows;
+		articleBody.addEventListener("input", calculateHeight, false);
+		articleTitle.addEventListener("input", calculateHeight, false);
