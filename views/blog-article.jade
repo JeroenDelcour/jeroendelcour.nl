@@ -3,6 +3,7 @@ extends layout
 block head
 	meta(name="date" content= post.published)
 	link(rel='stylesheet', href='/stylesheets/highlightjs/github-gist.css')
+	meta(property="og:image", content= post.ogimage)
 
 block content
 	article
