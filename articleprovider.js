@@ -119,6 +119,19 @@ module.exports = {
         db.close()
       });
     }
+  },
+
+  publish: function(article, callback) {
+    db = new sqlite3.Database(dbfile);
+    db.serialize(function() {
+      var stmt = db.prepare("INSERT INTO articles VALUES (datetime('now'), datetime('now'), ?, ?, ?, ?, ?)");
+      var articleSlug = slug(article.title);
+      stmt.run(article.title, article.markdown, marked(article.markdown), articleSlug, '');
+      stmt.finalize();
+      callback(null, articleSlug);
+    });
+    db.close();
+  },
 
     // db = new sqlite3.Database(dbfile);
     // db.serialize(function() {
@@ -140,5 +153,4 @@ module.exports = {
     //   }
     //   db.close();
     // })
-  }
 };

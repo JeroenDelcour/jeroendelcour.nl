@@ -63,7 +63,33 @@ block content
 		articleTitle.addEventListener('input', function(){
 			unsaved = true;
 		});
-		var draftButton = document.getElementById('saveDraftButton')
+		var draftButton = document.getElementById('saveDraftButton');
+		var publishButton = document.getElementById('publishButton');
+
+		publishButton.addEventListener('click', function(){
+			var r = window.confirm('Are you sure you want to publish this draft?');
+			if (!r) {
+				return false;
+			} else {
+				sendArticle = {
+					'title': articleTitle.value,
+					'markdown': articleBody.value
+				};
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4) {
+						if (xhttp.status == 200) {
+							console.log(xhttp.responseText);
+						} else {
+							window.alert(xhttp.responseText);
+						}
+					}
+				}
+				xhttp.open("POST", "/blog/draft/publish", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(JSON.stringify(sendArticle));
+			}
+		});
 
 		draftButton.addEventListener('click', function(e){
 			draftButton.innerHTML = 'Saving...';

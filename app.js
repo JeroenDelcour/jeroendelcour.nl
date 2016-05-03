@@ -55,7 +55,7 @@ app.route('/blog')
 // needs to be called before app.get('/blog/:slug')
 app.post('/blog/draft/save', function(req, res){
 	if (authorized(req)){
-		articleProvider.save(req.body, function(error, row){
+		articleProvider.save(req.body, function(error, articleSlug){
 			if (error) {
 				res.statusCode = 500;
 				res.render('error', {
@@ -63,18 +63,18 @@ app.post('/blog/draft/save', function(req, res){
 					error: error
 				});
 			} else {
-				res.statusCode = 200;
-				if (row) {
-					res.end(String(row.rowid));
-				} else {
-					res.end();
-				}
+				res.redirect('/blog/'+articleSlug);
 			}
 		});
 	} else {
 		res.statusCode = 401;
 		res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
 		res.end('Access denied');
+	}
+});
+app.post('/blog/draft/publish', function(req, res){
+	if (authorized(req)){
+		articleProvider.publish(req.body, function(error, row){})
 	}
 });
 app.get('/blog/draft', function(req, res){
