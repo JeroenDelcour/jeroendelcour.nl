@@ -259,10 +259,20 @@ cite a {
 
 
 article img {
+  position: relative;
   max-width: 100%;
+  /*width: 62.5em;*/
+  /*width: 100%;*/
+  left: 50%;
+  margin-right: -50%;
+  transform: translateX(-50%)
 }
 
-
+@media screen and (min-width: 62.5em) {
+  article img {
+    max-width: 62.5em;
+  }
+}
 
 .comments .name {
   color: #cd6400;
