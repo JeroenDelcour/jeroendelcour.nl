@@ -258,7 +258,7 @@ cite a {
 }
 
 
-article img {
+article img, article video {
   position: relative;
   max-width: 100%;
   left: 50%;
@@ -267,7 +267,7 @@ article img {
 }
 
 @media screen and (min-width: 62.5em) {
-  article img {
+  article img, article video {
     max-width: 62.5em;
   }
 }
