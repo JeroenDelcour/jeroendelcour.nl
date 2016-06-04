@@ -146,7 +146,7 @@ deleteButton.addEventListener('click', function(e){
 		if (xhttp.readyState == 4) {
 			if (xhttp.status == 200) {
 
-				drafts.splice(currentDraft, 1);
+				delete drafts[currentDraft];
 				draftSelect.remove(draftSelect.selectedIndex);
 				
 				unsaved = false;
