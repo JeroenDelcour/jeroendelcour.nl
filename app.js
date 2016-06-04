@@ -55,7 +55,23 @@ app.route('/blog')
 // needs to be called before app.get('/blog/:slug')
 app.post('/blog/draft/save', function(req, res){
 	if (authorized(req)){
-		articleProvider.save(req.body, function(error, articleSlug){
+		articleProvider.save(req.body, function(error, row){
+			if (error) {
+				res.statusCode = 500;
+				res.send(error.message);
+			} else {
+				res.send(String(row.rowid));
+			}
+		});
+	} else {
+		res.statusCode = 401;
+		res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
+		res.end('Access denied');
+	}
+});
+app.post('/blog/draft/delete', function(req, res){
+	if (authorized(req)){
+		articleProvider.delete(req.body.rowid, function(error){
 			if (error) {
 				res.statusCode = 500;
 				res.render('error', {
@@ -63,7 +79,8 @@ app.post('/blog/draft/save', function(req, res){
 					error: error
 				});
 			} else {
-				res.redirect('/blog/'+articleSlug);
+				res.statusCode = 200;
+				res.send();
 			}
 		});
 	} else {
@@ -74,7 +91,18 @@ app.post('/blog/draft/save', function(req, res){
 });
 app.post('/blog/draft/publish', function(req, res){
 	if (authorized(req)){
-		articleProvider.publish(req.body, function(error, row){})
+		articleProvider.publish(req.body, function(error, row){
+			if (error | rows == undefined) {
+				res.statusCode = 500;
+				res.render('error', {
+					message: error.message,
+					error: error
+				});
+			} else {
+				res.statusCode = 200;
+				res.end('Published!');
+			}
+		})
 	}
 });
 app.get('/blog/draft', function(req, res){
@@ -82,7 +110,7 @@ app.get('/blog/draft', function(req, res){
 		articleProvider.getDrafts(function(error, rows) {
 			if (error | rows == undefined) {
 				res.statusCode = 500;
-				res.end;
+				res.end();
 			} else {
 				res.render('blog-draft', { title: 'Draft | Jeroen Delcour', drafts: rows, now: dateformat(new Date(), 'mmmm dS, yyyy')});
 			}

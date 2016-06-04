@@ -121,10 +121,21 @@ module.exports = {
     }
   },
 
+  delete: function(rowid, callback) {
+    db = new sqlite3.Database(dbfile);
+    db.serialize(function() {
+      var stmt = db.prepare("DELETE FROM drafts WHERE rowid = ?;");
+      stmt.run(rowid);
+      stmt.finalize();
+      callback(null);
+    });
+    db.close();
+  },
+
   publish: function(article, callback) {
     db = new sqlite3.Database(dbfile);
     db.serialize(function() {
-      var stmt = db.prepare("INSERT INTO articles VALUES (datetime('now'), datetime('now'), ?, ?, ?, ?, ?)");
+      var stmt = db.prepare("INSERT INTO articles VALUES (datetime('now'), datetime('now'), ?, ?, ?, ?, ?);");
       var articleSlug = slug(article.title);
       stmt.run(article.title, article.markdown, marked(article.markdown), articleSlug, '');
       stmt.finalize();
