@@ -60,7 +60,11 @@ app.post('/blog/draft/save', function(req, res){
 				res.statusCode = 500;
 				res.send(error.message);
 			} else {
-				res.send(String(row.rowid));
+				if (row){
+					res.send(String(row.rowid));
+				} else {
+					res.end();
+				}
 			}
 		});
 	} else {
