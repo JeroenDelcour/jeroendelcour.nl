@@ -9,6 +9,10 @@ authorization.js
 *.csv
 *.json
 
+# videos
+*.mp4
+*.webm
+
 # Logs
 logs
 *.log
