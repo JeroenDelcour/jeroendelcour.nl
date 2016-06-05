@@ -1,0 +1,29 @@
+extends layout
+
+block append head
+	link(rel='stylesheet', href='/stylesheets/blog-draft.css')
+	link(rel='stylesheet', href='/stylesheets/highlightjs/github-gist.css')
+
+block content
+
+	form
+		select(id="draftSelect")
+			- each draft, index in drafts
+				option(value= index)= draft.title
+
+	article
+		button( id="previewButton" onclick="preview()") Preview
+		form
+			h1
+				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title", required)
+			time(datetime= now, pubdate="pubdate")= now
+			textarea( rows=1, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
+			div( id="formatted" style="display: none;")
+			button( id="saveButton", type="button") Publish changes
+
+	script(src="/javascripts/marked.min.js")
+	script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js")
+	script(type='text/javascript').
+		var drafts =!{JSON.stringify(drafts)};
+	script(src="/javascripts/draft+edit.js")
+	script(src="/javascripts/edit.js")
