@@ -125,6 +125,39 @@ app.get('/blog/draft', function(req, res){
 		res.end('Access denied');
 	}
 });
+app.route('/blog/edit')
+	.get(function(req, res){
+		if (authorized(req)){
+			articleProvider.getArticles(9999, 0, function(error, rows) {
+				if (error | rows == undefined) {
+					res.statusCode = 500;
+					res.end();
+				} else {
+					res.render('blog-edit', { title: 'Edit | Jeroen Delcour', drafts: rows, now: dateformat(new Date(), 'mmmm dS, yyyy')});
+				}
+			})
+		} else {
+			res.statusCode = 401;
+			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
+			res.end('Access denied');
+		}
+	})
+	.post(function(req, res) {
+		if (authorized(req)){
+			articleProvider.edit(req.body, function(error){
+				if (error) {
+					res.statusCode = 500;
+					res.send(error.message);
+				} else {
+					res.end();
+				}
+			});
+		} else {
+			res.statusCode = 401;
+			res.setHeader('WWW-Authenticate', 'Basic realm="Who goes there?"');
+			res.end('Access denied');
+		}
+	});
 
 app.get('/blog/:slug', function(req, res, next) {
 	var slug = req.params.slug;
