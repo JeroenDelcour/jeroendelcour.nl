@@ -260,15 +260,15 @@ cite a {
 article img, article video {
 	position: relative;
 	max-width: 100%;
-	height: auto;
-	left: 50%;
-	margin-right: -50%;
-	transform: translateX(-50%)
 }
 
 @media screen and (min-width: 62.5em) {
 	article img, article video {
 		max-width: 62.5em;
+		height: auto;
+		left: 50%;
+		margin-right: -50%;
+		transform: translateX(-50%)
 	}
 }
 
