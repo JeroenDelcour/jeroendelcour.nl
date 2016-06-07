@@ -15,9 +15,9 @@ block content
 		button( id="previewButton" onclick="preview()") Preview
 		form
 			h1
-				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title", required)
+				textarea( rows=1, name="title", id="editArticleTitle", placeholder="Title")
 			time(datetime= now, pubdate="pubdate")= now
-			textarea( rows=1, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody", required)
+			textarea( rows=1, style="display: block;" placeholder="PUNCH the keys, for God's sake! (Markdown formatting)", name="body", id="editArticleBody")
 			div( id="formatted" style="display: none;")
 			button( id="saveButton", type="button") Publish changes
 

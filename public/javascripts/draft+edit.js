@@ -62,8 +62,8 @@ var calculateContentHeight = function( ta, scanAmount ) {
 		height = ta.offsetHeight,
 		scrollHeight = ta.scrollHeight,
 		overflow = ta.style.overflow;
-	/// only bother if the ta is bigger than content
-	if ( height >= scrollHeight ) {
+	/// only bother if not empty and  the ta is bigger than content
+	if ( ta.value.length > 0 && height >= scrollHeight ) {
 		/// check that our browser supports changing dimension
 		/// calculations mid-way through a function call...
 		ta.style.height = (height + scanAmount) + 'px';
@@ -100,13 +100,14 @@ var calculateHeight = function(el) {
 	// otherwise it's "normal"
 	taLineHeight = parseInt(style.lineHeight, 10),
 	// Get the scroll height of the textarea
-	taHeight = calculateContentHeight(ta, taLineHeight),
+	taHeight = calculateContentHeight(ta, taLineHeight);
 	// calculate the number of lines
-	numberOfLines = Math.ceil(taHeight / taLineHeight);
+	if (ta.value.length > 0){
+		numberOfLines = Math.ceil(taHeight / taLineHeight);
+	} else {
+		numberOfLines = 1;
+	}
 	ta.rows = numberOfLines;
-
-	//- document.getElementById("lines").innerHTML = "there are " +
-	//- 	numberOfLines + " lines in the text area";
 };
 
 taRows = articleBody.rows;
