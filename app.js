@@ -96,7 +96,7 @@ app.post('/blog/draft/delete', function(req, res){
 app.post('/blog/draft/publish', function(req, res){
 	if (authorized(req)){
 		articleProvider.publish(req.body, function(error, row){
-			if (error | rows == undefined) {
+			if (error | row == undefined) {
 				res.statusCode = 500;
 				res.render('error', {
 					message: error.message,
