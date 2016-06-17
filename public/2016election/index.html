@@ -42,9 +42,9 @@
 
 <figure class="plotContainer">
 	<div id="legend">
-		<span class="label Sanders">• Sanders</span>
-		<span class="label Trump">• Trump</span>
 		<span class="label Clinton">• Clinton</span>
+		<span class="label Trump">• Trump</span>
+		<span class="label Sanders">• Sanders</span>
 		<span class="label Cruz">• Cruz</span>
 	</div>
 	<svg id="yAxis">
@@ -269,13 +269,13 @@ d3.csv('data/cruz', function(error, data) {
 
 		vis.append('svg:path')
 			.attr('d', lineGen(data2))
-			.attr('stroke', 'green')
+			.attr('stroke', 'blue')
 			.attr('stroke-width', 1)
 			.attr('fill', 'none');
 
 		tps.append('svg:path')
 			.attr('d', lineGenTps(data2))
-			.attr('stroke', 'green')
+			.attr('stroke', 'blue')
 			.attr('stroke-width', 1)
 			.attr('fill', 'none')
 			.style("stroke-dasharray", ("1, 1"));
@@ -323,13 +323,13 @@ d3.csv('data/cruz', function(error, data) {
 
 		vis.append('svg:path')
 			.attr('d', lineGen(data2))
-			.attr('stroke', 'blue')
+			.attr('stroke', 'green')
 			.attr('stroke-width', 1)
 			.attr('fill', 'none');
 
 		tps.append('svg:path')
 			.attr('d', lineGenTps(data2))
-			.attr('stroke', 'blue')
+			.attr('stroke', 'green')
 			.attr('stroke-width', 1)
 			.attr('fill', 'none')
 			.style("stroke-dasharray", ("1, 1"));
@@ -412,9 +412,9 @@ d3.csv('data/cruz', function(error, data) {
 					});
 		}
 
-		drawViralTweets(d3.select("#viralSanders"), viraltweets.sanders, "blue", "lightblue", HEIGHT - 65);
+		drawViralTweets(d3.select("#viralClinton"), viraltweets.clinton, "blue", "lightblue", HEIGHT - 65);
 		drawViralTweets(d3.select("#viralTrump"), viraltweets.trump, "red", "pink", HEIGHT - 50);
-		drawViralTweets(d3.select("#viralClinton"), viraltweets.clinton, "green", "lightgreen", HEIGHT - 35);
+		drawViralTweets(d3.select("#viralSanders"), viraltweets.sanders, "green", "lightgreen", HEIGHT - 35);
 		drawViralTweets(d3.select("#viralCruz"), viraltweets.cruz, "orange", "#ffe42b", HEIGHT - 20);
 	});	
 

@@ -124,13 +124,13 @@ svg {
 	white-space: nowrap;
 }
 #legend .Sanders {
-	color: blue;
+	color: green;
 }
 #legend .Trump {
 	color: red;
 }
 #legend .Clinton {
-	color: green;
+	color: blue;
 }
 #legend .Cruz {
 	color: orange;
