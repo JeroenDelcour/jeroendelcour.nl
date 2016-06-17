@@ -33,7 +33,7 @@ app.get('/about', function(req, res, next) {
 app.route('/blog')
 	.get(function(req, res){
 		articleProvider.getArticles(articlesPerRequest, 0, function(error, rows){
-			if (error | rows == undefined) {
+			if (error | typeof rows == 'undefined') {
 				res.statusCode = 500;
 				res.end;
 			} else {
@@ -96,7 +96,7 @@ app.post('/blog/draft/delete', function(req, res){
 app.post('/blog/draft/publish', function(req, res){
 	if (authorized(req)){
 		articleProvider.publish(req.body, function(error, row){
-			if (error | row == undefined) {
+			if (error | typeof row == 'undefined') {
 				res.statusCode = 500;
 				res.render('error', {
 					message: error.message,
@@ -112,7 +112,7 @@ app.post('/blog/draft/publish', function(req, res){
 app.get('/blog/draft', function(req, res){
 	if (authorized(req)){
 		articleProvider.getDrafts(function(error, rows) {
-			if (error | rows == undefined) {
+			if (error | typeof rows == 'undefined') {
 				res.statusCode = 500;
 				res.end();
 			} else {
@@ -129,7 +129,7 @@ app.route('/blog/edit')
 	.get(function(req, res){
 		if (authorized(req)){
 			articleProvider.getArticles(9999, 0, function(error, rows) {
-				if (error | rows == undefined) {
+				if (error | typeof rows == 'undefined') {
 					res.statusCode = 500;
 					res.end();
 				} else {
@@ -165,7 +165,7 @@ app.get('/blog/:slug', function(req, res, next) {
 		if (error) {
 			res.statusCode = 500;
 			res.end();
-		} else if (row == undefined) {
+		} else if (typeof row == 'undefined') {
 			err = new Error('Not found');
 			err.status = 404;
 			next(err);
