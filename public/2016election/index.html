@@ -177,7 +177,8 @@ d3.csv('data/cruz', function(error, data) {
 	var yAxis = d3.svg.axis()
 		.scale(yScale)
 		.orient('left')
-		.ticks(5);
+		.ticks(5)
+		.tickFormat(d3.format("1%"));
 
 	var yAxisTps = d3.svg.axis()
 		.scale(yScaleTps)
@@ -223,7 +224,7 @@ d3.csv('data/cruz', function(error, data) {
 		.attr("class", "y label")
 		.attr("text-anchor", "middle")
 		.attr("y", MARGINS.left - 45)
-		.attr("x", -HEIGHT/2)
+		.attr("x", -HEIGHT/2 + 8)
 		.attr("dy", ".75em")
 		.attr("transform", "rotate(-90)")
 		.text("Sentiment");
@@ -237,7 +238,7 @@ d3.csv('data/cruz', function(error, data) {
 		.attr("class", "y label")
 		.attr("text-anchor", "middle")
 		.attr("y", MARGINS.left - 45)
-		.attr("x", -HEIGHT - (150/2))
+		.attr("x", -HEIGHT - (150/2) + 8)
 		.attr("dy", ".75em")
 		.attr("transform", "rotate(-90)")
 		.text("Tweets per second");
