@@ -141,7 +141,7 @@ d3.csv('data/cruz', function(error, data) {
 			top: 20,
 			right: 20,
 			bottom: 20,
-			left: 50
+			left: 60
 		}
 
 	var vis = d3.select("#sentiment")
@@ -166,7 +166,7 @@ d3.csv('data/cruz', function(error, data) {
 		.range([HEIGHT - MARGINS.top, 0]); // Seems backwards because SVG is y-down
 
 	var yScaleTps = d3.scale.linear()
-		.domain([0, 10])
+		.domain([0, 1000])
 		.range([150 - MARGINS.bottom, 0])
 
 	var xAxis = d3.svg.axis()
@@ -201,7 +201,7 @@ d3.csv('data/cruz', function(error, data) {
 			return xScale(d.datetime);
 		})
 		.y(function(d) {
-			return yScaleTps(d.tweet_count / 60 / 60 / 2);
+			return yScaleTps(d.tweet_count / 60 / 60 / 2 * 100);
 		})
 		.interpolate("basis");
 
@@ -223,7 +223,7 @@ d3.csv('data/cruz', function(error, data) {
 	yAxisEl.append("text")
 		.attr("class", "y label")
 		.attr("text-anchor", "middle")
-		.attr("y", MARGINS.left - 45)
+		.attr("y", MARGINS.left - 55)
 		.attr("x", -HEIGHT/2 + 8)
 		.attr("dy", ".75em")
 		.attr("transform", "rotate(-90)")
@@ -237,12 +237,11 @@ d3.csv('data/cruz', function(error, data) {
 	yAxisEl.append("text")
 		.attr("class", "y label")
 		.attr("text-anchor", "middle")
-		.attr("y", MARGINS.left - 45)
+		.attr("y", MARGINS.left - 55)
 		.attr("x", -HEIGHT - (150/2) + 8)
 		.attr("dy", ".75em")
 		.attr("transform", "rotate(-90)")
 		.text("Tweets per second");
-
 	vis.append('svg:path')
 		.attr('d', lineGen(data))
 		.attr('stroke', 'orange')

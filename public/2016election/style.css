@@ -91,13 +91,13 @@ svg {
 }
 #yAxis {
 	float: left;
-	width: 50px;
+	width: 60px;
 	overflow: visible;
 }
 #plot {
 	float: right;
-	width: calc(100% - 50px);
-	margin-left: -50px;
+	width: calc(100% - 60px);
+	margin-left: -60px;
 	overflow-x: scroll;
 }
 #plot #tweetsPerSecond {
