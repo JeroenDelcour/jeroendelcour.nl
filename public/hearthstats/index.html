@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<style>
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+/*
+.link {
+	stroke: red;
+}*/
+
+.node text {
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.node circle{
+/*	stroke:#fff;
+	stroke-width:3px;*/
+	fill:#555;
+}
+
+</style>
+<body>
+
+<select name="class" id="classSelect">
+	<option value="warrior">Warrior</option>
+	<option value="shaman">Shaman</option>
+	<option value="mage">Mage</option>
+	<option value="rogue">Rogue</option>
+	<option value="hunter">Hunter</option>
+	<option value="druid">Druid</option>
+	<option value="priest">Priest</option>
+	<option value="warlock">Warlock</option>
+	<option value="paladin">Paladin</option>
+</select>
+<span>Data from tournament decks from 2016/02/27 to 2016/07/01</span>
+
+<script>
+
+var colors = {
+	'warrior': 'red',
+	'shaman': 'orange',
+	'hunter': 'orange',
+	'rogue': 'green',
+	'mage': 'blue',
+	'paladin': 'yellow',
+	'warlock': 'purple',
+	'priest': 'gold',
+	'druid': 'green',
+}
+
+var classSelect = document.getElementById('classSelect');
+classSelect.addEventListener('change', function(e) {
+	nodes = [];
+	links = [];
+	force.nodes(nodes);
+	force.links(links);
+	resetGraph(classSelect.value)
+});
+
+var width = window.innerWidth,
+	height = window.innerHeight;
+
+var svg = d3.select("body").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+
+var force = d3.layout.force()
+	.gravity(.05)
+	.distance(100)
+	.charge(-100)
+	.size([width, height]);
+
+function resetGraph(hearthClass) {
+	d3.selectAll("svg > *").remove();
+
+	d3.json('network_'+hearthClass+'.json', function(json) {
+
+		var edges = [];
+		json.links.forEach(function(e) {
+			var sourceNode = json.nodes.filter(function(n) {
+				return n.id === e.source;
+			})[0],
+				targetNode = json.nodes.filter(function(n) {
+					return n.id === e.target;
+				})[0];
+
+			edges.push({
+				source: sourceNode,
+				target: targetNode,
+				value: e.weight
+			});
+		});
+
+		force
+			.nodes(json.nodes)
+			.links(edges)
+			.linkDistance(width/4)
+			.start();
+
+		var maxEdgeValue = d3.max(edges, function(d) { return d.value; });
+
+		var link = svg.selectAll(".link")
+			.data(edges)
+		.enter().append("line")
+			.attr("class", "link")
+		.style("opacity", function(d) { return d.value / maxEdgeValue; })
+		.style("stroke", colors[hearthClass])
+		.style("stroke-width", function(d) { return d.value / (maxEdgeValue / 2); });
+
+		var node = svg.selectAll(".node")
+			.data(json.nodes)
+		.enter().append("g")
+			.attr("class", "node")
+			.call(force.drag);
+
+		node.append("circle")
+			.attr("r","5");
+
+		node.append("text")
+			.attr("dx", 12)
+			.attr("dy", ".35em")
+			.text(function(d) { return d.name });
+
+		force.on("tick", function() {
+		link.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+		node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+		});
+	});
+}
+
+resetGraph('warrior');
+
+</script>
+
