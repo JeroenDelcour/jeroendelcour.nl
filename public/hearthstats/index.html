@@ -7,7 +7,7 @@
 <aside id="menu">
 	<h1>Hearthstone card synergy</h1>
 	<span id="subtitle">
-	Measured in how often cards appeared in the same Whispers of the Old Gods tournament decks
+	Measured in how often cards appeared together in Whispers of the Old Gods tournament decks
 	</span>
 	<select name="class" id="classSelect">
 		<option value="Shaman">Shaman</option>
@@ -25,6 +25,8 @@
 
 	<table>
 	</table>
+
+	<p>(cards with &lt;2 connections</br>are left out in the graph)</p>
 </aside>
 
 <script>
@@ -33,12 +35,12 @@ var colors = {
 	'Warrior': 'red',
 	'Shaman': 'orange',
 	'Hunter': 'orange',
-	'Rogue': 'green',
+	'Rogue': 'lightgreen',
 	'Mage': 'lightblue',
 	'Paladin': 'gold',
-	'Warlock': 'purple',
+	'Warlock': 'violet',
 	'Priest': 'gold',
-	'Druid': 'green',
+	'Druid': 'lightgreen',
 },
 tablecolors = {
 	'Warrior': 'pink',
