@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<style>
+body,html {
+	font: 11px sans-serif;
+	height: 100%;
+	width: 100%;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.tooltip {
+	white-space: nowrap;
+	position: absolute;
+	pointer-events: none;
+	background-color: white;
+}
+.label {
+	font-weight: bold;
+}
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+var margin = {top: 20, right: 20, bottom: 75, left: 75},
+	width = document.body.scrollWidth - margin.left - margin.right,
+	height = document.body.scrollHeight - margin.top - margin.bottom;
+
+/* 
+ * value accessor - returns the value to encode for a given data object.
+ * scale - maps value to a visual display encoding, such as a pixel position.
+ * map function - maps from data value to display value
+ * axis - sets up axis
+ */ 
+
+// setup x 
+var xValue = function(d) { return d.GDP;}, // data -> value
+	xScale = d3.scale.log().range([0, width]), // value -> display
+	xMap = function(d) { return xScale(xValue(d));}, // data -> display
+	xAxis = d3.svg.axis()
+				.scale(xScale)
+				.orient("bottom")
+				.ticks(0, ".1f");
+
+// setup y
+var yValue = function(d) { return d.WeightedMedals;}, // data -> value
+	yScale = d3.scale.log().range([height, 0]), // value -> display
+	yMap = function(d) { return yScale(yValue(d));}, // data -> display
+	yAxis = d3.svg.axis()
+				.scale(yScale)
+				.orient("left")
+				.ticks(0, ".1f");
+
+// add the graph canvas to the body of the webpage
+var svg = d3.select("body").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+  .append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// add the tooltip area to the parent body
+var tooltip = d3.select("body").append("div")
+	.attr("class", "tooltip")
+	.style("position", "absolute")
+	.style("font", "11px sans-serif")
+	.style("pointer-events", "none")
+	.style("opacity", 0);
+
+// load data
+d3.csv("medals.csv", function(error, data) {
+
+  // change string (from CSV) into number format
+  data.forEach(function(d) {
+	d.WeightedMedals = +d.WeightedMedals;
+	d.Gold = +d.Gold;
+	d.Silver = +d.Silver;
+	d.Bronze = +d.Bronze;
+	d.Population = +d.Population;
+	d.GDP = +d.GDP;
+  });
+
+  // don't want dots overlapping axis, so add in buffer to data domain
+  xScale.domain([1, d3.max(data, xValue)+1]);
+  yScale.domain([1, d3.max(data, yValue)+1]);
+
+  // x-axis
+  svg.append("g")
+	  .attr("class", "x axis")
+	  .attr("transform", "translate(0," + height + ")")
+	  .call(xAxis)
+	.append("text")
+	  .attr("class", "label")
+	  .attr("x", width/2)
+	  .attr("y", margin.bottom/2)
+	  .style("text-anchor", "middle")
+	  .text("GDP (USD billions)");
+
+  // y-axis
+  var yAxisEl = svg.append("g")
+	  .attr("class", "y axis")
+	  .call(yAxis);
+	yAxisEl.append("text")
+	  .attr("class", "label")
+	  .attr("transform", "rotate(-90)")
+	  .attr("x", -height/2)
+	  .attr("y", -margin.left + 6)
+	  .attr("dy", ".71em")
+	  .style("text-anchor", "middle")
+	  .text("Weighted medals");
+	yAxisEl.append("text")
+	  .attr("class", "sublabel")
+	  .attr("transform", "rotate(-90)")
+	  .attr("x", -height/2)
+	  .attr("y", -margin.left + 25)
+	  .attr("dy", ".71em")
+	  .style("text-anchor", "middle")
+	  .text("(gold=4, silver=2, bronze=1)");
+
+	// least-squares regression line
+
+	svg.append("path")
+		.attr("id", "regline")
+		.attr("d", "M "+xScale(1)+" "+yScale(1)+" L "+xScale(15094)+" "+yScale(15094*0.0201))
+		.style("fill", "none")
+		.style("stroke", "#00984b");
+	svg.append("text")
+		.append("textPath")
+			.attr("xlink:href", "#regline")
+			.style("text-anchor","middle")
+			.attr("startOffset", "50%")		
+			.text("Least squares regression (R²=0.782)");
+
+  // draw dots
+  svg.selectAll(".dot")
+	  .data(data)
+	.enter().append("circle")
+	  .attr("class", "dot")
+	  .attr("r", 3.5)
+	  .attr("cx", xMap)
+	  .attr("cy", yMap)
+	  .attr("fill", "black")
+	  .on("mouseover", function(d) {
+			d3.select(this).transition()
+				.duration(200)
+				.attr("fill", "#f99e1c");
+			tooltip.transition()
+			   .duration(200)
+			   .style("opacity", .9);
+			tooltip.html("<b>" + d.Country + "</b><br/>"
+					+ "Gold: " + d.Gold + "<br/>"
+					+ "Silver: " + d.Silver + "<br/>"
+					+ "Bronze: " + d.Bronze + "<br/>"
+					+ "GDP: " + d.GDP + " billion USD")
+			   .style("left", (d3.event.pageX + 10) + "px")
+			   .style("top", (d3.event.pageY - 5) + "px");
+		    if (tooltip[0][0].offsetLeft + tooltip[0][0].offsetWidth > document.body.scrollWidth) {
+		    	tooltip.style("left", (tooltip[0][0].offsetLeft - tooltip[0][0].offsetWidth - 20) + "px");
+		    }
+	  })
+	  .on("mouseout", function(d) {
+			d3.select(this).transition()
+				.duration(500)
+				.attr("fill", "black");
+		  	tooltip.transition()
+			   .duration(500)
+			   .style("opacity", 0);
+	  });
+});
+
+</script>
+</body>
+</html>
