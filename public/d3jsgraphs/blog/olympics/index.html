@@ -3,6 +3,10 @@
 <meta charset="utf-8">
 <title>Olympics</title>
 <style>
+html, body {
+	width: 100%;
+	height: 100%;
+}
 body {
 	font: 11px sans-serif;
 }
@@ -81,8 +85,8 @@ body {
 d3.json("data.json", function(data) {
 
 	var margin = {top: 20, right: 20, bottom: 75, left: 75},
-	width = 960 - margin.left - margin.right,
-	height = 500 - margin.top - margin.bottom;
+	width = document.body.scrollWidth - margin.left - margin.right,
+	height = document.body.scrollHeight - margin.top - margin.bottom;
 
 	metric_index_map = {'GDP': 5, 'GDP per capita': 6, 'Population': 7, 'Weighted medals across all Games': 8};
 
@@ -193,6 +197,12 @@ d3.json("data.json", function(data) {
 							+ "Population: " + d[7] + " million")
 					   .style("left", (d3.event.pageX + 10) + "px")
 					   .style("top", (d3.event.pageY - 5) + "px");
+					if (tooltip[0][0].offsetLeft + tooltip[0][0].offsetWidth > document.body.scrollWidth) {
+						tooltip.style("left", (tooltip[0][0].offsetLeft - tooltip[0][0].offsetWidth - 60) + "px");
+					}
+					if (tooltip[0][0].offsetTop + tooltip[0][0].offsetHeight > document.body.scrollHeight) {
+						tooltip.style("top", (tooltip[0][0].offsetTop - tooltip[0][0].offsetHeight - 20) + "px");
+					}
 				})
 				.on("mouseout", function(d) {
 					d3.select(this).transition()
@@ -321,13 +331,13 @@ d3.json("data.json", function(data) {
 			}
 		})
 	var metricSelectEl = document.getElementById("metricSelect")
-	metricSelectEl.value = 'GDP';
+	metricSelectEl.value = 'Population';
 	d3.select("#metricSelect")
 		.on("change", function() {
 			update(data[yearSelectEl.value]);
 		})
 	var logSelectEl = document.getElementById("logSelect")
-	logSelectEl.checked = false;
+	logSelectEl.checked = true;
 	d3.select("#logSelect")
 		.on("change", function() {
 			update(data[yearSelectEl.value]);
