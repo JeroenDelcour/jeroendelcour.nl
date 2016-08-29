@@ -140,25 +140,6 @@ header nav a:active {
 	transition: none;
 	background-color: #FFA44D;
 }
-.coffeestain {
-	display: none;
-}
-@media (min-width: 1010px) {
-	.coffeestain {
-		display: block;
-		position: absolute;
-		width: 20vw;
-		max-width: 150px;
-		height: 20vw;
-		max-height: 150px;
-		top: 50%;
-		left: 50%;
-		margin-left: 21em;
-		background-image: url("../images/coffee_stain.png");
-		background-size: contain;
-		background-repeat: no-repeat;
-	}
-}
 
 /*  ==========================================================================
 	About
