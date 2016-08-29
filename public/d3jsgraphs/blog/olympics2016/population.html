@@ -127,7 +127,7 @@ d3.csv("medals.csv", function(error, data) {
 
 	svg.append("path")
 		.attr("id", "regline")
-		.attr("d", "M "+xScale(0)+" "+yScale(0)+" L "+xScale(1371220000/1e6)+" "+yScale(1371220000/1e6*7.604e-2))
+		.attr("d", "M "+xScale(0)+" "+yScale(20.2915)+" L "+xScale(1371220000/1e6)+" "+yScale(1371220000/1e6*7.604e-2))
 		.style("fill", "none")
 		.style("stroke", "#00984b");
 	svg.append("text")
@@ -139,7 +139,7 @@ d3.csv("medals.csv", function(error, data) {
 
 	svg.append("path")
 		.attr("id", "regline2")
-		.attr("d", "M "+xScale(0)+" "+yScale(0)+" L "+xScale(1371220000/1e6)+" "+yScale(1371220000/1e6*1.718e-1))
+		.attr("d", "M "+xScale(0)+" "+yScale(4.0465)+" L "+xScale(1371220000/1e6)+" "+yScale(1371220000/1e6*1.718e-1))
 		.style("fill", "none")
 		.style("stroke", "#7fc241");
 	svg.append("text")

@@ -124,20 +124,6 @@ d3.csv("medals.csv", function(error, data) {
 	  .style("text-anchor", "middle")
 	  .text("(gold=4, silver=2, bronze=1)");
 
-	// least-squares regression line
-
-	svg.append("path")
-		.attr("id", "regline")
-		.attr("d", "M "+xScale(1)+" "+yScale(1)+" L "+xScale(15094)+" "+yScale(15094*0.0201))
-		.style("fill", "none")
-		.style("stroke", "#00984b");
-	svg.append("text")
-		.append("textPath")
-			.attr("xlink:href", "#regline")
-			.style("text-anchor","middle")
-			.attr("startOffset", "50%")		
-			.text("Least squares regression (R²=0.782)");
-
   // draw dots
   svg.selectAll(".dot")
 	  .data(data)
@@ -173,6 +159,20 @@ d3.csv("medals.csv", function(error, data) {
 			   .duration(500)
 			   .style("opacity", 0);
 	  });
+
+	// least-squares regression line
+
+	svg.append("path")
+		.attr("id", "regline")
+		.attr("d", "M "+xScale(1)+" "+yScale(1.3433834696603655)+" L "+xScale(15094)+" "+yScale(59.862685357913769))
+		.style("fill", "none")
+		.style("stroke", "#00984b");
+	svg.append("text")
+		.append("textPath")
+			.attr("xlink:href", "#regline")
+			.style("text-anchor","middle")
+			.attr("startOffset", "75%")
+			.text("Least squares regression (R²=0.291)");
 });
 
 </script>
