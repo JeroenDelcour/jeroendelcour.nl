@@ -84,7 +84,7 @@ body {
 <script>
 d3.json("data.json", function(data) {
 
-	var margin = {top: 20, right: 20, bottom: 75, left: 75},
+	var margin = {top: 20, right: 20, bottom: 100, left: 50},
 	width = document.body.scrollWidth - margin.left - margin.right,
 	height = document.body.scrollHeight - margin.top - margin.bottom;
 
@@ -252,8 +252,8 @@ d3.json("data.json", function(data) {
 			  .call(xAxis)
 			.append("text")
 			  .attr("class", "xlabel")
-			  .attr("x", width/2)
-			  .attr("y", margin.bottom/2)
+			  .attr("x", width*0.5)
+			  .attr("y", margin.bottom*0.3)
 			  .style("text-anchor", "middle")
 			  .text(function(){
 				if (metricSelectEl.value == 'GDP') {
@@ -272,8 +272,8 @@ d3.json("data.json", function(data) {
 			yAxisEl.append("text")
 			  .attr("class", "ylabel")
 			  .attr("transform", "rotate(-90)")
-			  .attr("x", -height/2)
-			  .attr("y", -margin.left + 6)
+			  .attr("x", -height*0.5)
+			  .attr("y", -margin.left + 3)
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "middle")
 			  .text("Weighted medals");
@@ -281,7 +281,7 @@ d3.json("data.json", function(data) {
 			  .attr("class", "sublabel")
 			  .attr("transform", "rotate(-90)")
 			  .attr("x", -height/2)
-			  .attr("y", -margin.left + 25)
+			  .attr("y", -margin.left + 15)
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "middle")
 			  .text("(gold=4, silver=2, bronze=1)");
