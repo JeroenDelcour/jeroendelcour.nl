@@ -28,6 +28,9 @@ body {
 .xlabel, .ylabel {
 	font-weight: bold;
 }
+.regLabel {
+	font-size: 16px;
+}
 </style>
 <body>
 
@@ -150,7 +153,8 @@ d3.json("data.json", function(data) {
 			.data(data['data'], function(d) { return d[0]; });
 		var gs = dots.enter().append("g")
 				.attr("class", "dot")
-				.attr("opacity",1);
+				.attr("opacity", 1)
+				.attr("transform", "translate(0,0)");
 		gs.append("svg:image")
 				.attr("class", "flag")
 				.attr("xlink:href", function(d) {
@@ -169,12 +173,19 @@ d3.json("data.json", function(data) {
 		dots.transition()
 				.duration(750)
 				.attr("transform", function(d) {
-					var x = Math.round(xScale(xValue(d)));
-					var y = Math.round(yScale(yValue(d)));
+					if (((metricSelectEl.value == 'GDP' || metricSelectEl.value == 'GDP per capita') && d[5] == null)
+						|| (metricSelectEl.value == 'Weighted medals across all Games' && d[8] == null)) {
+						var x = Math.round(xScale(0.01));
+						var y = Math.round(yScale(0.01));
+					} else {
+						var x = Math.round(xScale(xValue(d)));
+						var y = Math.round(yScale(yValue(d)));
+					}
 					return "translate("+x+","+y+")";
 				})
 				.attr("opacity", function(d) {
-					if ((metricSelectEl.value == 'GDP' || metricSelectEl.value == 'GDP per capita') && d[5] == null ) {
+					if (((metricSelectEl.value == 'GDP' || metricSelectEl.value == 'GDP per capita') && d[5] == null)
+						|| (metricSelectEl.value == 'Weighted medals across all Games' && d[8] == null)) {
 						return 0;
 					} else {
 						return 1;
@@ -186,14 +197,16 @@ d3.json("data.json", function(data) {
 						.duration(200);
 						// .attr("fill", "#cd6400");
 					tooltip.transition()
-					   .duration(200)
-					   .style("opacity", .9);
+						.duration(200)
+						.style("opacity", .9);
+					if (d[5]) {var GDP = d[5];} else {var GDP = '?';};
+					if (d[6]*1e3) {var GDP_per_capita = d[6]*1e3;} else {var GDP_per_capita = '?';};
 					tooltip.html("<b>" + d[0] + "</b><br/>"
 							+ "Gold: " + d[1] + "<br/>"
 							+ "Silver: " + d[2] + "<br/>"
 							+ "Bronze: " + d[3] + "<br/>"
-							+ "GDP: " + d[5] + " billion US$" + "<br/>"
-							+ "GDP per capita: " + d[6]*1e3 + " US$" + "<br/>"
+							+ "GDP: " + GDP + " billion US$" + "<br/>"
+							+ "GDP per capita: " + GDP_per_capita + " US$" + "<br/>"
 							+ "Population: " + d[7] + " million")
 					   .style("left", (d3.event.pageX + 10) + "px")
 					   .style("top", (d3.event.pageY - 5) + "px");
@@ -211,6 +224,41 @@ d3.json("data.json", function(data) {
 					   .duration(500)
 					   .style("opacity", 0);
 				});
+
+		// ordinary least-squares linear regression line
+		// only show for log-log axes, since log-log data was used for fitting the line
+		if (metricSelectEl.value == 'Population') {
+			var d = data['log-log regressions']['population'];
+		} else if (metricSelectEl.value == 'GDP') {
+			var d = data['log-log regressions']['GDP'];
+		} else if (metricSelectEl.value == 'GDP per capita') {
+			var d = data['log-log regressions']['GDP per capita'];
+		} else if (metricSelectEl.value == 'Weighted medals across all Games') {
+			var d = data['log-log regressions']['weighted medals across Games'];
+		}
+		if (logSelectEl.checked) {
+			regLine.transition()
+				.duration(750)
+				.attr("opacity", d['r-squared']*10)
+				// .attr("stroke-width", d['r-squared']*10)
+				.attr("x1", xScale(d.p1[0]))
+				.attr("x2", xScale(d.p2[0]))
+				.attr("y1", yScale(d.p1[1]))
+				.attr("y2", yScale(d.p2[1]));
+			// show R-squared value
+			regLabel.transition()
+					.duration(750)
+					.attr("opacity", 1)
+					.text("R² = " + d['r-squared'].toFixed(2));
+		} else {
+			regLine.transition()
+				.duration(750)
+				.attr("opacity", 0);
+			regLabel.transition()
+				.duration(750)
+				.attr("opacity", 0);
+		}
+
 	}
 
 	function init(data)
@@ -285,6 +333,20 @@ d3.json("data.json", function(data) {
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "middle")
 			  .text("(gold=4, silver=2, bronze=1)");
+
+			// regression line
+			regLine = svg.append("line")
+				.attr("stroke-width", 1)
+				.attr("stroke", "black")
+				.attr("stroke-linecap", "butt")
+				.attr("stroke-dasharray", "5,5");
+			// regression line R-squared label
+			regLabel = svg.append("text")
+				.attr("x", margin.left * 0.5)
+				.attr("y", margin.top * 0.5)
+				.attr("class", "regLabel")
+				.attr("opacity", 0);
+
 	}
 
 	for (var key in data){
@@ -304,13 +366,16 @@ d3.json("data.json", function(data) {
 			} else {
 				d[7] = null;
 			}
-			// d[5] = Math.round((d[5]*1e-9)*10)/10; // GDP in billions
-			// d[6] = Math.round((d[6]*1e-3)*10)/10; // GDP per capita in thousands
-			// d[7] = Math.round((d[7]*1e-6)*10)/10; // population in millions
 		});
+		data[key]['log-log regressions']['GDP'].p1[0] = Math.round((data[key]['log-log regressions']['GDP'].p1[0]*1e-9)*10)/10;
+		data[key]['log-log regressions']['GDP'].p2[0] = Math.round((data[key]['log-log regressions']['GDP'].p2[0]*1e-9)*10)/10;
+		data[key]['log-log regressions']['GDP per capita'].p1[0] = Math.round((data[key]['log-log regressions']['GDP per capita'].p1[0]*1e-3)*10)/10;
+		data[key]['log-log regressions']['GDP per capita'].p2[0] = Math.round((data[key]['log-log regressions']['GDP per capita'].p2[0]*1e-3)*10)/10;
+		data[key]['log-log regressions']['population'].p1[0] = Math.round((data[key]['log-log regressions']['population'].p1[0]*1e-6)*10)/10;
+		data[key]['log-log regressions']['population'].p2[0] = Math.round((data[key]['log-log regressions']['population'].p2[0]*1e-6)*10)/10;
 	}
 
-	var svg, xValue, xScale, xAxis, yValue, yScale, yAxis;
+	var svg, xValue, xScale, xAxis, yValue, yScale, yAxis, regLine, regLabel;
 
 	//setup our ui
 	var yearSelectEl = document.getElementById("yearSelect")
@@ -320,9 +385,13 @@ d3.json("data.json", function(data) {
 			var year = this.value;
 			if (year == '1916'){
 				svg.selectAll(".dot").remove();
+				regLine.attr("opacity", 0);
+				regLabel.attr("opacity", 0);
 				WWI.attr("visibility", "visible");
 			} else if (year == '1940' || year == '1944') {
 				svg.selectAll(".dot").remove();
+				regLine.attr("opacity", 0);
+				regLabel.attr("opacity", 0);
 				WWII.attr("visibility", "visible");
 			} else {
 				update(data[year]);
@@ -355,19 +424,19 @@ d3.json("data.json", function(data) {
 		.attr("class", "cancellation")
 		.attr("x", width/2)
 		.attr("y", height/2)
-			.style("text-anchor", "middle")
-			.style("font-size", "3em")
-			.attr("visibility", "hidden")
-			.text("Cancelled due to WWI");
+		.style("text-anchor", "middle")
+		.style("font-size", "3em")
+		.attr("visibility", "hidden")
+		.text("Cancelled due to WWI");
 
 	var WWII = svg.append("text")
 		.attr("class", "cancellation")
 		.attr("x", width/2)
 		.attr("y", height/2)
-			.style("text-anchor", "middle")
-			.style("font-size", "3em")
-			.attr("visibility", "hidden")
-			.text("Cancelled due to WWII");
+		.style("text-anchor", "middle")
+		.style("font-size", "3em")
+		.attr("visibility", "hidden")
+		.text("Cancelled due to WWII");
 
 	update(data['2016']);
 });
