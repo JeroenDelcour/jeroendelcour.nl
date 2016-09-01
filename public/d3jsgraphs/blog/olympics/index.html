@@ -239,7 +239,8 @@ d3.json("data.json", function(data) {
 		if (logSelectEl.checked) {
 			regLine.transition()
 				.duration(750)
-				.attr("opacity", d['r-squared']*10)
+				.attr("opacity", 1)
+				.attr("stroke-width", d['r-squared']*10)
 				// .attr("stroke-width", d['r-squared']*10)
 				.attr("x1", xScale(d.p1[0]))
 				.attr("x2", xScale(d.p2[0]))
