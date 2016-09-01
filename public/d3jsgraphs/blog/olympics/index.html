@@ -104,7 +104,7 @@ d3.json("data.json", function(data) {
 			var xMin = d3.min(data['data'], function(d) { return d[metric_index_map[metricSelectEl.value]]; });
 			xScale = d3.scale.log()
 					.range([0, width])
-					.domain([Math.max(xMin, 0.01), xMax]); // value -> display
+					.domain([Math.max(xMin, 0.001), xMax]); // value -> display
 		} else {
 			xScale = d3.scale.linear()
 					.range([0, width])
@@ -144,7 +144,7 @@ d3.json("data.json", function(data) {
 				} else if (metricSelectEl.value == 'Population') {
 					return "Population (millions)"
 				} else if (metricSelectEl.value == 'Weighted medals across all Games') {
-					return "Weighted medals across all Games (normalized per Games) (% of max)"
+					return "Weighted medals across all Games (normalized per Games) (% of medal pool)"
 				}
 			})
 
