@@ -1,0 +1,58 @@
+@import 'https://fonts.googleapis.com/css?family=Playfair+Display';
+
+main {
+	padding-top: 3em;
+}
+
+.big {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.3em;
+	line-height: 1em;
+	padding-bottom: 1em;
+	font-weight: 300;
+}
+
+strong {
+	color: black;
+}
+
+section {
+	float: left;
+	max-width: 17em;
+	margin-bottom: 2em;
+}
+section:first-of-type {
+	margin-right: 3em;
+}
+
+h1 {
+	font-family: 'Playfair Display', serif;
+	font-weight: normal;
+	font-size: 3em;
+	margin: 0;
+	padding: 0;
+}
+
+section p {
+	margin-top: 0;
+}
+
+.me {
+	margin: 3em;
+	clear: both;
+	text-align: center;
+}
+
+.me img {
+	max-height: 12em;
+}
+
+.email {
+	display: block;
+	padding: 1em;
+	font-weight: bold;
+}
+
+hr {
+	clear: both;
+}

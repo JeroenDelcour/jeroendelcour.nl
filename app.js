@@ -30,6 +30,10 @@ app.get('/about', function(req, res, next) {
 	res.render('about', { title: 'Jeroen Delcour' });
 });
 
+app.get('/webdesign', function(req, res, next) {
+	res.render('webdesign', { title: 'Jeroen Delcour' });
+});
+
 app.route('/blog')
 	.get(function(req, res){
 		articleProvider.getArticles(articlesPerRequest, 0, function(error, rows){
