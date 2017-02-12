@@ -166,7 +166,7 @@ d3.csv('data/cruz', function(error, data) {
 		.range([HEIGHT - MARGINS.top, 0]); // Seems backwards because SVG is y-down
 
 	var yScaleTps = d3.scale.linear()
-		.domain([0, 1000])
+		.domain([0, 2000])
 		.range([150 - MARGINS.bottom, 0])
 
 	var xAxis = d3.svg.axis()
