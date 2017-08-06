@@ -29,7 +29,7 @@ module.exports = {
 
 		var db = new sqlite3.Database(dbfile);
 
-		db.all("SELECT *, rowid FROM articles ORDER BY published DESC LIMIT "+limit+" OFFSET "+offset, function(error, rows) {
+		db.all("SELECT *, rowid FROM articles ORDER BY published DESC LIMIT ? OFFSET ?", [limit, offset], function(error, rows) {
 			if (error) {
 				callback(error);
 			} else {
@@ -48,7 +48,7 @@ module.exports = {
 
 		var db = new sqlite3.Database(dbfile);
 
-		db.get("SELECT * FROM articles WHERE slug='"+slug+"'", function(error, row) {
+		db.get("SELECT * FROM articles WHERE slug = ?", slug, function(error, row) {
 			if (error | row == undefined) {
 				callback(error, row);
 			} else {
